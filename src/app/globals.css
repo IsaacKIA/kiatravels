@@ -1,0 +1,639 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  --color-ink: #0a0a0a;
+  --color-ink-deep: #000000;
+  --color-gold: #e5b32f;
+  --color-gold-light: #fef08a;
+  --color-gold-deep: #92400e;
+  --color-paper: #f8fafc;
+  --color-white: #ffffff;
+  --color-charcoal: #0f172a;
+  --color-charcoal-soft: #475569;
+  --color-brick: #dc2626;
+  --color-line: #e2e8f0;
+  --color-azure: #2563eb;
+  --color-emerald: #059669;
+  --color-violet: #7c3aed;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-deep: var(--color-ink-deep);
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+  --color-gold-deep: var(--color-gold-deep);
+  --color-paper: var(--color-paper);
+  --color-charcoal: var(--color-charcoal);
+  --color-charcoal-soft: var(--color-charcoal-soft);
+  --color-brick: var(--color-brick);
+  --color-line: var(--color-line);
+  --color-azure: var(--color-azure);
+  --color-emerald: var(--color-emerald);
+  --color-violet: var(--color-violet);
+  --font-display: "Fraunces", serif;
+  --font-sans: "Plus Jakarta Sans", "Public Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* ============================================
+   AURORA GLOW BACKGROUNDS — Boosted Visibility
+   ============================================ */
+.aurora-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-blob-1 {
+  position: absolute;
+  top: -15%;
+  left: 15%;
+  width: 680px;
+  height: 680px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(234, 88, 12, 0.20) 40%, rgba(245, 158, 11, 0) 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: float-slow 14s ease-in-out infinite alternate;
+  mix-blend-mode: multiply;
+}
+
+.aurora-blob-2 {
+  position: absolute;
+  top: 10%;
+  right: -8%;
+  width: 720px;
+  height: 720px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.30) 0%, rgba(124, 58, 237, 0.15) 40%, rgba(37, 99, 235, 0) 70%);
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  animation: float-slow 18s ease-in-out infinite alternate-reverse;
+  mix-blend-mode: multiply;
+}
+
+.aurora-blob-3 {
+  position: absolute;
+  bottom: -15%;
+  left: -8%;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.28) 0%, rgba(5, 150, 105, 0.12) 50%, rgba(16, 185, 129, 0) 70%);
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  animation: float-slow 20s ease-in-out infinite alternate;
+  mix-blend-mode: multiply;
+}
+
+/* Grain texture overlay for depth */
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+}
+
+/* ============================================
+   GLASSMORPHISM CLASSES
+   ============================================ */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 25px 50px -20px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.03), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.glass-card-hover {
+  transition: all 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(245, 158, 11, 0.25);
+}
+
+/* ============================================
+   BOARDING PASS / TICKET CARD
+   ============================================ */
+.ticket-card {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow:
+    0 30px 70px -15px rgba(15, 23, 42, 0.16),
+    0 0 0 1px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.ticket-card::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: var(--color-paper);
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  box-shadow: inset -3px 0 6px rgba(0, 0, 0, 0.06);
+}
+
+.ticket-card::after {
+  content: "";
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: var(--color-paper);
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  box-shadow: inset 3px 0 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Perforated divider */
+.perforated {
+  position: relative;
+  border: none;
+  height: 2px;
+  background-image: linear-gradient(
+    to right,
+    #cbd5e1 0,
+    #cbd5e1 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  background-size: 12px 2px;
+  background-repeat: repeat-x;
+}
+
+/* ============================================
+   GRADIENT TEXTS
+   ============================================ */
+.gradient-text-gold {
+  background: linear-gradient(135deg, #0f172a 20%, #b45309 75%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-luxury {
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #b45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-vivid {
+  background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 50%, #db2777 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   SHIMMER BUTTON
+   ============================================ */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-btn {
+  background: linear-gradient(90deg, #0a0a0a 0%, #1e293b 35%, #374151 50%, #1e293b 65%, #0a0a0a 100%);
+  background-size: 200% 100%;
+}
+
+.shimmer-btn:hover {
+  animation: shimmer 1.8s infinite linear;
+}
+
+/* ============================================
+   PULSE / LIVE INDICATORS
+   ============================================ */
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.8; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.pulse-radar {
+  animation: ping-slow 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* ============================================
+   FLOAT ANIMATION
+   ============================================ */
+@keyframes float-slow {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); }
+  33% { transform: translateY(-18px) rotate(1.5deg) scale(1.03); }
+  66% { transform: translateY(-8px) rotate(-0.8deg) scale(0.98); }
+  100% { transform: translateY(0px) rotate(0deg) scale(1); }
+}
+
+.animate-float {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+/* ============================================
+   SCROLL-REVEAL ANIMATION SYSTEM
+   ============================================ */
+
+/* Base state — hidden */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for children */
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+.reveal-delay-5 { transition-delay: 0.40s; }
+.reveal-delay-6 { transition-delay: 0.48s; }
+
+/* Slide from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide from right */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(28px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale in */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================================
+   FOCUS RING
+   ============================================ */
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   PHOTO CARD (DESTINATION EXPLORER)
+   ============================================ */
+.photo-card-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.08) 0%,
+    rgba(15, 23, 42, 0.40) 40%,
+    rgba(15, 23, 42, 0.96) 100%
+  );
+}
+
+.photo-card-glow {
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-card-glow:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 35px 70px -15px rgba(15, 23, 42, 0.28), 0 0 0 1px rgba(245, 158, 11, 0.35);
+}
+
+.photo-card-img {
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-card-glow:hover .photo-card-img {
+  transform: scale(1.10);
+}
+
+/* ============================================
+   FLOATING GLASS PILL NAVBAR
+   ============================================ */
+.floating-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.10), 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+}
+
+/* ============================================
+   GRADIENT BORDER GOLD
+   ============================================ */
+.gradient-border-gold {
+  position: relative;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.4), rgba(217, 119, 6, 0.1), rgba(37, 99, 235, 0.2));
+  padding: 1px;
+}
+
+/* ============================================
+   STEP CONNECTOR LINE (HowItWorks)
+   ============================================ */
+.step-connector {
+  position: relative;
+}
+
+.step-connector::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: calc(50% + 24px);
+  width: calc(100% - 48px);
+  height: 2px;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.8), rgba(245, 158, 11, 0.2));
+  border-radius: 2px;
+}
+
+.step-connector:last-child::after {
+  display: none;
+}
+
+/* Mobile step connector — vertical */
+@media (max-width: 639px) {
+  .step-connector::after {
+    display: none;
+  }
+  .step-connector-v::after {
+    content: "";
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 28px;
+    height: 32px;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(245, 158, 11, 0.7), rgba(245, 158, 11, 0.1));
+    border-radius: 2px;
+  }
+}
+
+/* ============================================
+   ANIMATED FILTER PILL (DestinationExplorer)
+   ============================================ */
+.filter-tab-container {
+  position: relative;
+}
+
+.filter-active-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #0f172a;
+  border-radius: 12px;
+  transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1), width 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+/* ============================================
+   TESTIMONIAL CARD
+   ============================================ */
+.testimonial-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(245, 158, 11, 0.2);
+}
+
+/* Star rating */
+.star-filled {
+  color: #f59e0b;
+}
+
+/* ============================================
+   DARK SECTION HIGHLIGHT
+   ============================================ */
+.dark-section-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.dark-section-glow::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float-slow 16s ease-in-out infinite;
+}
+
+.dark-section-glow::after {
+  content: "";
+  position: absolute;
+  bottom: -20%;
+  left: 5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.10) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ============================================
+   BORDER GLOW ANIMATION (Hero card)
+   ============================================ */
+@keyframes border-glow {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.card-border-glow {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+/* ============================================
+   DESTINATION SWITCH TRANSITION
+   ============================================ */
+.dest-transition {
+  transition: all 380ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   FLIGHT ROUTE SHIMMER
+   ============================================ */
+@keyframes flight-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+.flight-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.flight-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 33%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.3), transparent);
+  animation: flight-shimmer 2.5s ease-in-out infinite;
+}
+
+/* ============================================
+   COUNT-UP NUMBER ANIMATION
+   ============================================ */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.count-up-visible {
+  animation: countUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================
+   SOCIAL ICON HOVER
+   ============================================ */
+.social-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #94a3b8;
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-icon-link:hover {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #f59e0b;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   MENU & MODAL TRANSITION ANIMATIONS
+   ============================================ */
+@keyframes stamp-in {
+  0% { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-stamp-in {
+  animation: stamp-in 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dropdown-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-dropdown-in {
+  animation: dropdown-in 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modal-backdrop-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-modal-backdrop {
+  animation: modal-backdrop-in 180ms ease-out forwards;
+}
+
+@keyframes modal-content-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal-content {
+  animation: modal-content-in 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================
+   WHY KIA — HERO CARD
+   ============================================ */
+.why-hero-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f172a 100%);
+  color: white;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  box-shadow: 0 25px 50px -10px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(245, 158, 11, 0.12);
+  transition: all 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.why-hero-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 35px 70px -10px rgba(15, 23, 42, 0.45), 0 0 0 1px rgba(245, 158, 11, 0.28);
+}
