@@ -17,6 +17,8 @@ import {
   Compass,
   ArrowRight,
   PhoneCall,
+  Home,
+  Info,
 } from "lucide-react";
 import { services, aboutMenu, siteConfig, trackEvent } from "@/data/site";
 import { useDisclosure } from "@/hooks/useDisclosure";
@@ -43,7 +45,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
-  const [menuTop, setMenuTop] = useState(0);
+  const [menuTop, setMenuTop] = useState(60);
 
   const headerRef = useRef<HTMLElement>(null);
   const announcementRef = useRef<HTMLDivElement>(null);
@@ -62,20 +64,46 @@ export default function Navbar() {
   // Measure true header bottom for mobile menu positioning
   useEffect(() => {
     const measure = () => {
-      const announcementH = announcementRef.current?.offsetHeight ?? 0;
-      const headerH = headerRef.current?.offsetHeight ?? 0;
-      setMenuTop(announcementH + headerH);
+      if (headerRef.current) {
+        const rect = headerRef.current.getBoundingClientRect();
+        setMenuTop(Math.max(0, Math.round(rect.bottom)));
+      }
     };
     measure();
     window.addEventListener("resize", measure, { passive: true });
-    return () => window.removeEventListener("resize", measure);
+    window.addEventListener("scroll", measure, { passive: true });
+    return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("scroll", measure);
+    };
   }, [scrolled]);
 
+  const toggleMobileMenu = () => {
+    if (!mobileOpen && headerRef.current) {
+      const rect = headerRef.current.getBoundingClientRect();
+      setMenuTop(Math.max(0, Math.round(rect.bottom)));
+    }
+    setMobileOpen((v) => !v);
+  };
+
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileOpen) {
+        setMobileOpen(false);
+      }
     };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prevOverflow;
+      };
+    }
   }, [mobileOpen]);
 
   return (
@@ -118,7 +146,7 @@ export default function Navbar() {
       {/* Floating Glassmorphic Main Navbar */}
       <header
         ref={headerRef}
-        className={`sticky top-0 z-40 transition-all duration-300 ${
+        className={`sticky top-0 z-[70] transition-all duration-300 ${
           scrolled
             ? "floating-nav py-2.5 shadow-lg backdrop-blur-xl"
             : "bg-white/80 py-3.5 backdrop-blur-md border-b border-line/60"
@@ -323,58 +351,118 @@ export default function Navbar() {
           {/* Mobile Hamburger Toggle */}
           <button
             type="button"
-            className="focus-ring rounded-xl p-2 text-ink hover:bg-slate-100 lg:hidden"
+            className="focus-ring flex h-10 w-10 items-center justify-center rounded-xl p-2 text-ink hover:bg-slate-100 lg:hidden transition-colors"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen((v) => !v)}
+            onClick={toggleMobileMenu}
           >
-            {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileOpen ? <X className="h-6 w-6 text-ink" /> : <Menu className="h-6 w-6 text-ink" />}
           </button>
         </div>
+      </header>
 
-        {/* Mobile Slide-Out Menu */}
-        {mobileOpen && (
+      {/* Mobile Slide-Down Menu Sheet & Backdrop */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-[60] lg:hidden">
+          {/* Backdrop */}
           <div
-            className="fixed inset-x-0 bottom-0 z-50 flex flex-col bg-white lg:hidden overflow-y-auto"
-            style={{ top: menuTop }}
+            className="fixed inset-0 bg-slate-950/45 backdrop-blur-xs transition-opacity animate-modal-backdrop"
+            onClick={() => setMobileOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Slide-Down Menu Panel */}
+          <div
+            className="fixed inset-x-0 bottom-0 z-[60] flex flex-col bg-white shadow-2xl overflow-y-auto animate-stamp-in overscroll-contain"
+            style={{ top: `${menuTop}px` }}
           >
-            {/* Gradient accent top border */}
-            <div className="h-[2px] bg-gradient-to-r from-transparent via-amber-400/60 to-transparent shrink-0" />
-            <nav className="flex flex-1 flex-col gap-1 p-5">
+            {/* Top gold accent ribbon */}
+            <div className="h-[2px] bg-gradient-to-r from-amber-500 via-amber-400 to-emerald-500 shrink-0" />
+
+            {/* Live Admissions ribbon inside menu */}
+            <div className="flex items-center justify-between border-b border-line/60 bg-amber-50/70 px-5 py-2.5 text-xs text-amber-950 font-medium shrink-0">
+              <div className="flex items-center gap-2 overflow-hidden">
+                <Sparkles className="h-3.5 w-3.5 text-amber-600 shrink-0" />
+                <span className="truncate">Fall 2026/2027 Intakes Open &bull; Ghana to Global</span>
+              </div>
+              <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                Active
+              </span>
+            </div>
+
+            {/* Main Navigation Links */}
+            <nav className="flex-1 p-4 space-y-2">
               <Link
                 href="/"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-xl px-4 py-3 text-base font-bold text-ink hover:bg-slate-50"
+                className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-bold text-ink hover:bg-slate-50 transition-colors"
               >
-                Home
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700">
+                  <Home className="h-4 w-4" />
+                </div>
+                <span>Home</span>
               </Link>
 
               {/* Mobile Services Accordion */}
-              <div>
+              <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setMobileServicesOpen((v) => !v)}
-                  className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-base font-bold text-ink hover:bg-slate-50"
+                  className="flex w-full items-center justify-between p-3.5 text-left text-base font-bold text-ink hover:bg-slate-100/70 transition-colors"
+                  aria-expanded={mobileServicesOpen}
                 >
-                  <span>Services</span>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 text-amber-900">
+                      <Briefcase className="h-4 w-4" />
+                    </div>
+                    <span>Services</span>
+                  </div>
                   <ChevronDown
-                    className={`h-5 w-5 text-slate-500 transition-transform ${
-                      mobileServicesOpen ? "rotate-180" : ""
+                    className={`h-5 w-5 text-slate-500 transition-transform duration-200 ${
+                      mobileServicesOpen ? "rotate-180 text-ink" : ""
                     }`}
                   />
                 </button>
+
                 {mobileServicesOpen && (
-                  <div className="ml-4 space-y-1 border-l-2 border-amber-200 pl-3 py-1">
-                    {services.map((s) => (
-                      <Link
-                        key={s.slug}
-                        href={s.href}
-                        onClick={() => setMobileOpen(false)}
-                        className="block rounded-lg px-3 py-2 text-sm font-medium text-charcoal hover:bg-slate-100"
-                      >
-                        {s.title}
-                      </Link>
-                    ))}
+                  <div className="border-t border-slate-200/70 p-2 space-y-1.5 bg-white">
+                    <Link
+                      href="/services"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center justify-between rounded-xl bg-amber-50 px-3.5 py-2.5 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-colors"
+                    >
+                      <span>Explore All 5 Services</span>
+                      <ArrowRight className="h-3.5 w-3.5 text-amber-800" />
+                    </Link>
+
+                    {services.map((service) => {
+                      const Icon = serviceIcons[service.slug] || Briefcase;
+                      const badge = serviceBadges[service.slug];
+
+                      return (
+                        <Link
+                          key={service.slug}
+                          href={service.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="flex items-center justify-between rounded-xl p-2.5 hover:bg-slate-50 transition-colors"
+                        >
+                          <div className="flex items-center gap-2.5">
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-800">
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-bold text-ink">{service.title}</p>
+                              <p className="text-[11px] text-charcoal-soft line-clamp-1">{service.description}</p>
+                            </div>
+                          </div>
+                          {badge && (
+                            <span className="shrink-0 rounded bg-amber-100/80 px-2 py-0.5 text-[9px] font-bold text-amber-900 ml-2">
+                              {badge}
+                            </span>
+                          )}
+                        </Link>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -383,34 +471,49 @@ export default function Navbar() {
               <a
                 href="/#destinations"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-2 rounded-xl px-4 py-3 text-base font-bold text-blue-700 bg-blue-50/60"
+                className="flex items-center justify-between rounded-2xl p-3.5 text-base font-bold text-blue-900 bg-gradient-to-r from-blue-50 to-indigo-50/60 border border-blue-200/70 hover:from-blue-100 hover:to-indigo-100 transition-all"
               >
-                <Globe2 className="h-5 w-5" />
-                <span>Explore 15+ Countries</span>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-xs">
+                    <Globe2 className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <span className="block text-sm font-bold text-blue-950">Explore 15+ Countries</span>
+                    <span className="block text-[11px] font-medium text-blue-700/80">UK, Canada, Germany, USA &amp; more</span>
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-blue-600" />
               </a>
 
               {/* Mobile About Accordion */}
-              <div>
+              <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 overflow-hidden">
                 <button
                   type="button"
                   onClick={() => setMobileAboutOpen((v) => !v)}
-                  className="flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-base font-bold text-ink hover:bg-slate-50"
+                  className="flex w-full items-center justify-between p-3.5 text-left text-base font-bold text-ink hover:bg-slate-100/70 transition-colors"
+                  aria-expanded={mobileAboutOpen}
                 >
-                  <span>About</span>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-200 text-slate-800">
+                      <Info className="h-4 w-4" />
+                    </div>
+                    <span>About KIA</span>
+                  </div>
                   <ChevronDown
-                    className={`h-5 w-5 text-slate-500 transition-transform ${
-                      mobileAboutOpen ? "rotate-180" : ""
+                    className={`h-5 w-5 text-slate-500 transition-transform duration-200 ${
+                      mobileAboutOpen ? "rotate-180 text-ink" : ""
                     }`}
                   />
                 </button>
+
                 {mobileAboutOpen && (
-                  <div className="ml-4 space-y-1 border-l-2 border-slate-200 pl-3 py-1">
+                  <div className="border-t border-slate-200/70 p-2 space-y-1 bg-white">
                     {aboutMenu.map((item) => (
                       <Link
                         key={item.label}
                         href={item.href}
                         onClick={() => setMobileOpen(false)}
-                        className="block rounded-lg px-3 py-2 text-sm font-medium text-charcoal hover:bg-slate-100"
+                        className="block rounded-lg px-3 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -419,36 +522,53 @@ export default function Navbar() {
                 )}
               </div>
 
+              {/* Contact Us */}
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-xl px-4 py-3 text-base font-bold text-ink hover:bg-slate-50"
+                className="flex items-center gap-3 rounded-2xl p-3.5 text-base font-bold text-ink hover:bg-slate-50 transition-colors"
               >
-                Contact
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 text-amber-900">
+                  <PhoneCall className="h-4 w-4" />
+                </div>
+                <span>Contact Us</span>
               </Link>
             </nav>
 
-            <div className="border-t border-line p-5 space-y-3 bg-slate-50">
+            {/* Mobile Actions & Direct Touchpoints */}
+            <div className="border-t border-line/80 bg-slate-50 p-5 space-y-3 shrink-0">
               <a
                 href={`https://wa.me/${siteConfig.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent("whatsapp_click", { location: "mobile_menu" })}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 text-sm font-bold text-white shadow-md"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] py-3.5 text-sm font-bold text-white shadow-md active:scale-98 transition-all"
               >
                 <MessageCircle className="h-5 w-5" />
-                <span>Chat on WhatsApp</span>
+                <span>Chat on WhatsApp (Online)</span>
               </a>
+
               <StartJourneyButton
-                className="shimmer-btn group flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white shadow-md"
+                className="shimmer-btn group flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white shadow-md active:scale-98 transition-all"
                 onOpenChange={(open) => {
                   if (open) setMobileOpen(false);
                 }}
               />
+
+              <div className="pt-2 flex items-center justify-between text-xs text-charcoal-soft border-t border-line/60">
+                <a
+                  href={`tel:${siteConfig.phoneLocalHref}`}
+                  className="flex items-center gap-1.5 font-bold text-slate-800 hover:text-amber-800 transition-colors"
+                >
+                  <PhoneCall className="h-3.5 w-3.5 text-amber-700" />
+                  <span>{siteConfig.phoneLocal}</span>
+                </a>
+                <span className="text-[11px] text-slate-500">Accra, Ghana</span>
+              </div>
             </div>
           </div>
-        )}
-      </header>
+        </div>
+      )}
     </>
   );
 }
