@@ -7,6 +7,7 @@ import HowItWorks from "@/components/home/HowItWorks";
 import WhyKia from "@/components/home/WhyKia";
 import Testimonials from "@/components/home/Testimonials";
 import TrustTransparency from "@/components/home/TrustTransparency";
+import FeaturedJobs from "@/components/home/FeaturedJobs";
 import FinalCTA from "@/components/home/FinalCTA";
 
 export default function HomePage() {
@@ -20,6 +21,7 @@ export default function HomePage() {
       <HowItWorks />
       <WhyKia />
       <Testimonials />
+      <FeaturedJobs />
       <TrustTransparency />
       <FinalCTA />
     </>

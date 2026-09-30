@@ -210,14 +210,25 @@ export default function Navbar() {
                     <p className="text-xs font-bold uppercase tracking-wider text-amber-800">
                       Our Specialized Travel &amp; Career Pathways
                     </p>
-                    <Link
-                      href="/services"
-                      onClick={() => setServicesOpen(false)}
-                      className="text-xs font-bold text-charcoal hover:text-amber-700 flex items-center gap-1"
-                    >
-                      <span>All Services</span>
-                      <ArrowRight className="h-3 w-3" />
-                    </Link>
+                    <div className="flex items-center gap-3">
+                      <Link
+                        href="/jobs"
+                        onClick={() => setServicesOpen(false)}
+                        className="text-xs font-bold text-emerald-700 hover:text-emerald-600 flex items-center gap-1"
+                      >
+                        <span>Job Listings</span>
+                        <ArrowRight className="h-3 w-3" />
+                      </Link>
+                      <span className="text-line">|</span>
+                      <Link
+                        href="/services"
+                        onClick={() => setServicesOpen(false)}
+                        className="text-xs font-bold text-charcoal hover:text-amber-700 flex items-center gap-1"
+                      >
+                        <span>All Services</span>
+                        <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
@@ -433,6 +444,15 @@ export default function Navbar() {
                     >
                       <span>Explore All 5 Services</span>
                       <ArrowRight className="h-3.5 w-3.5 text-amber-800" />
+                    </Link>
+
+                    <Link
+                      href="/jobs"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center justify-between rounded-xl bg-emerald-50 px-3.5 py-2.5 text-xs font-bold text-emerald-900 hover:bg-emerald-100 transition-colors"
+                    >
+                      <span>🌍 Job Opportunities</span>
+                      <ArrowRight className="h-3.5 w-3.5 text-emerald-800" />
                     </Link>
 
                     {services.map((service) => {
