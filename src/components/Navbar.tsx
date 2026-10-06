@@ -19,6 +19,7 @@ import {
   PhoneCall,
   Home,
   Info,
+  BookOpen,
 } from "lucide-react";
 import { services, aboutMenu, siteConfig, trackEvent } from "@/data/site";
 import { useDisclosure } from "@/hooks/useDisclosure";
@@ -335,6 +336,13 @@ export default function Navbar() {
             </div>
 
             <Link
+              href="/insights"
+              className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
+            >
+              Insights
+            </Link>
+
+            <Link
               href="/contact"
               className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
             >
@@ -504,6 +512,24 @@ export default function Navbar() {
                 </div>
                 <ArrowRight className="h-4 w-4 text-blue-600" />
               </a>
+
+              {/* Mobile Insights & Guides Link */}
+              <Link
+                href="/insights"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-between rounded-2xl p-3.5 text-base font-bold text-amber-950 bg-gradient-to-r from-amber-50 to-orange-50/60 border border-amber-200/70 hover:from-amber-100 hover:to-orange-100 transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-600 text-white shadow-xs">
+                    <BookOpen className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <span className="block text-sm font-bold text-amber-950">Insights &amp; Guides</span>
+                    <span className="block text-[11px] font-medium text-amber-800/80">Visa guides, work permits &amp; advice</span>
+                  </div>
+                </div>
+                <ArrowRight className="h-4 w-4 text-amber-600" />
+              </Link>
 
               {/* Mobile About Accordion */}
               <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 overflow-hidden">
