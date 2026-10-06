@@ -35,7 +35,10 @@ export const metadata: Metadata = {
     telephone: true,
   },
   verification: {
-    google: "eslnstHc1_xtBLjOLtK5yEsapallcH8PsYVFtXFlwBg",
+    google: [
+      "ABYN-qEa5KzqlZ7RPLGkU5NBnwaBafHruc4yRnq5EW0",
+      "eslnstHc1_xtBLjOLtK5yEsapallcH8PsYVFtXFlwBg",
+    ],
   },
   openGraph: {
     title: "KIA-Start Up Consult | Your Partner in Global Careers",
