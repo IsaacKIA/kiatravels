@@ -11,7 +11,7 @@ export const siteConfig = {
   whatsappNumber: "233241332246", // used for wa.me links, no + or spaces
   email: "info@kiastartupconsult.com",
   address: "Ajumako – Techiman Road, Adjacent DCE's Bangalore",
-  siteUrl: "https://www.kiastartupconsult.com",
+  siteUrl: "https://travels.kiastartupconsult.com",
 };
 
 export type NavLink = { label: string; href: string };

@@ -7,10 +7,26 @@ import { destinations, otherDestinationsNote, studyAbroadProcess } from "@/data/
 import { siteConfig, buildWhatsAppLink } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Study Abroad from Ghana",
+  title: "Study Abroad from Ghana | UK, Canada & USA University Guidance",
   description:
-    "Guidance on studying abroad in the UK, Canada and the USA — destinations, requirements and application preparation.",
+    "Study abroad in the UK, Canada, and the USA with guidance from KIA-Start Up Consult. We help Ghanaians choose programmes, understand requirements, and prepare strong applications.",
+  keywords: [
+    "Study Abroad Ghana",
+    "Study in UK from Ghana",
+    "Study in Canada from Ghana",
+    "Study in USA from Ghana",
+    "University Abroad Ghana",
+    "International Student Ghana",
+    "Higher Education Abroad Ghana",
+  ],
   alternates: { canonical: "/study-abroad" },
+  openGraph: {
+    title: "Study Abroad from Ghana | KIA-Start Up Consult",
+    description:
+      "UK, Canada, and USA study guidance for Ghanaians — programme selection, requirements, and application support.",
+    type: "website",
+    url: "/study-abroad",
+  },
 };
 
 export default function StudyAbroadPage() {

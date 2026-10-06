@@ -8,10 +8,26 @@ import { opportunities, sectorsExplored, workAbroadProcess } from "@/data/work-a
 import { siteConfig, buildWhatsAppLink } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Work Abroad from Ghana",
+  title: "Work Abroad from Ghana | International Employment Opportunities",
   description:
-    "Guidance on international employment opportunities, requirements and the application process for Ghanaians looking to work abroad.",
+    "Explore verified international employment opportunities for Ghanaians. KIA-Start Up Consult guides you through sectors, requirements, and the full application process for working abroad.",
+  keywords: [
+    "Work Abroad Ghana",
+    "International Employment Ghana",
+    "Overseas Jobs Ghanaians",
+    "Jobs in Europe from Ghana",
+    "Work in UK Ghana",
+    "Work in Canada Ghana",
+    "Work Placement Abroad",
+  ],
   alternates: { canonical: "/work-abroad" },
+  openGraph: {
+    title: "Work Abroad from Ghana | KIA-Start Up Consult",
+    description:
+      "Verified international employment opportunities for Ghanaians. Guidance on sectors, requirements, and the full application process.",
+    type: "website",
+    url: "/work-abroad",
+  },
 };
 
 export default function WorkAbroadPage() {

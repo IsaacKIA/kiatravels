@@ -6,10 +6,26 @@ import { visaServices } from "@/data/visa-assistance";
 import { siteConfig, buildWhatsAppLink } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Visa Assistance",
+  title: "Visa Assistance Ghana | Application Support & Documentation",
   description:
-    "Practical support with your visa application, documentation and preparation — for any destination.",
+    "Get practical visa application support from KIA-Start Up Consult. We help Ghanaians prepare complete, honest applications for UK, Canada, USA, Europe and beyond.",
+  keywords: [
+    "Visa Assistance Ghana",
+    "Visa Application Ghana",
+    "UK Visa Ghana",
+    "Canada Visa Ghana",
+    "Schengen Visa Ghana",
+    "Visa Documentation Ghana",
+    "Travel Visa Help Ghana",
+  ],
   alternates: { canonical: "/visa-assistance" },
+  openGraph: {
+    title: "Visa Assistance Ghana | KIA-Start Up Consult",
+    description:
+      "Practical visa application support and documentation guidance for Ghanaians — UK, Canada, USA, Europe and beyond.",
+    type: "website",
+    url: "/visa-assistance",
+  },
 };
 
 export default function VisaAssistancePage() {

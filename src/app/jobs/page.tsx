@@ -8,11 +8,79 @@ import { jobs, jobSectors, type JobStatus } from "@/data/jobs";
 import { siteConfig, buildWhatsAppLink } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Job Opportunities | KIA-Start Up Consult",
+  title: "International Job Opportunities | Work Abroad from Ghana",
   description:
-    "Explore verified international job opportunities available through KIA-Start Up Consult. We help Ghanaians find and apply for work abroad with honest guidance.",
+    "Explore verified international job opportunities in Europe and beyond. KIA-Start Up Consult helps Ghanaians find and apply for work abroad — with accommodation, flights, and placement included.",
+  keywords: [
+    "Work Abroad Ghana",
+    "Jobs in Europe for Ghanaians",
+    "International Job Opportunities Ghana",
+    "Jobs in Lithuania for Ghanaians",
+    "Jobs in Poland for Ghanaians",
+    "Overseas Jobs Ghana",
+    "Employment Abroad Ghana",
+    "KIA Start Up Consult Jobs",
+  ],
   alternates: { canonical: "/jobs" },
+  openGraph: {
+    title: "International Job Opportunities | KIA-Start Up Consult",
+    description:
+      "Verified work opportunities abroad for Ghanaians — with accommodation, flight tickets, and confirmed placements in Europe and beyond.",
+    type: "website",
+    url: "/jobs",
+  },
 };
+
+const siteUrl = "https://travels.kiastartupconsult.com";
+
+const jobsJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "International Job Opportunities — KIA-Start Up Consult",
+  description:
+    "Verified overseas work opportunities for Ghanaians, including accommodation, flights, and confirmed placements.",
+  url: `${siteUrl}/jobs`,
+  numberOfItems: jobs.filter((j) => j.status === "open").length,
+  itemListElement: jobs
+    .filter((j) => j.status === "open")
+    .map((job, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "JobPosting",
+        "@id": `${siteUrl}/jobs#${job.slug}`,
+        title: job.title,
+        description: job.description ?? `Work placement opportunity in ${job.country}.`,
+        hiringOrganization: {
+          "@type": "Organization",
+          name: "KIA-Start Up Consult",
+          sameAs: siteUrl,
+        },
+        jobLocation: {
+          "@type": "Place",
+          address: {
+            "@type": "PostalAddress",
+            addressCountry: job.country,
+          },
+        },
+        employmentType: job.type.toUpperCase().replace("-", "_"),
+        baseSalary: job.salary
+          ? {
+              "@type": "MonetaryAmount",
+              currency: job.salary.startsWith("EUR") ? "EUR" : "GHS",
+              value: {
+                "@type": "QuantitativeValue",
+                description: job.salary,
+              },
+            }
+          : undefined,
+        validThrough: job.applicationDeadline ?? undefined,
+        jobBenefits: job.benefits?.join(", "),
+        qualifications: job.requirements?.join(", "),
+      },
+    })),
+};
+
 
 const statusTabs: { label: string; value: JobStatus | "all" }[] = [
   { label: "All Listings", value: "all" },
@@ -38,6 +106,10 @@ function JobsContent() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobsJsonLd) }}
+      />
       <TrackPageView eventName="jobs_page_view" />
 
       <PageHero

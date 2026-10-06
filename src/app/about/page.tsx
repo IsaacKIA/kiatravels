@@ -6,10 +6,24 @@ import { values } from "@/data/about";
 import { services, buildWhatsAppLink } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About Us | KIA-Start Up Consult — Ghana Travel & Work Abroad Agency",
   description:
-    "KIA-Start Up Consult helps people in Ghana navigate international career, education and travel opportunities with practical, honest guidance.",
+    "Learn about KIA-Start Up Consult — the Ghana-based consultancy helping people navigate international careers, study abroad, visa assistance, and travel with practical, honest guidance.",
+  keywords: [
+    "About KIA Start Up Consult",
+    "Ghana Travel Agency",
+    "Ghana Work Abroad Consultancy",
+    "Ghana Study Abroad Agency",
+    "International Consultancy Ghana",
+  ],
   alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About KIA-Start Up Consult | Ghana's International Career & Travel Agency",
+    description:
+      "Practical, honest guidance for Ghanaians seeking international careers, education, and travel opportunities.",
+    type: "website",
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {
