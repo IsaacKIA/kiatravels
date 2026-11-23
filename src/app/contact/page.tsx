@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail, Phone, Clock, Building2, ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import TrackPageView from "@/components/TrackPageView";
 import ContactForm from "@/components/ContactForm";
@@ -71,21 +72,45 @@ export default function ContactPage() {
                   </a>
                 </div>
               </div>
+
+              <div className="flex items-start gap-3">
+                <Clock className="mt-0.5 h-5 w-5 shrink-0 text-gold-deep" aria-hidden />
+                <div>
+                  <p className="text-sm text-charcoal-soft">Business Hours</p>
+                  <p className="text-ink">{siteConfig.businessHours}</p>
+                  <p className="text-xs text-charcoal-soft mt-0.5">
+                    WhatsApp &amp; International Partner Desk monitored 7 days a week
+                  </p>
+                </div>
+              </div>
             </div>
 
             <a
               href={buildWhatsAppLink("Hi, I'd like to get in touch with KIA-Start Up Consult.")}
               target="_blank"
               rel="noopener noreferrer"
-              className="focus-ring mt-8 inline-flex items-center justify-center rounded-sm bg-[#25D366] px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition-colors hover:brightness-95"
+              className="focus-ring mt-8 inline-flex items-center justify-center rounded-xl bg-[#25D366] px-7 py-3.5 text-sm font-semibold tracking-wide text-white shadow-sm transition-colors hover:brightness-95"
             >
               Chat on WhatsApp
             </a>
 
-            <p className="mt-6 max-w-sm text-xs leading-relaxed text-charcoal-soft">
-              We haven&rsquo;t published set business hours yet — for the fastest response, reach
-              us on WhatsApp.
-            </p>
+            {/* B2B Partnerships Box */}
+            <div className="mt-8 rounded-2xl border border-line bg-white p-5 shadow-xs">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-800">
+                <Building2 className="h-4 w-4 text-amber-600" />
+                <span>Employer &amp; HR Agency Partnerships</span>
+              </div>
+              <p className="mt-2 text-xs leading-relaxed text-charcoal-soft">
+                Are you an international recruitment agency or employer looking to source vetted Ghanaian manpower for the GCC, Europe, or UK?
+              </p>
+              <Link
+                href="/partners"
+                className="focus-ring mt-3 inline-flex items-center gap-1.5 text-xs font-bold text-ink hover:text-amber-800"
+              >
+                <span>View Corporate Profile &amp; Manpower Capabilities</span>
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
 
           <Suspense fallback={<div className="h-96 rounded-sm border border-line bg-white" />}>

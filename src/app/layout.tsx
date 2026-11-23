@@ -1,8 +1,24 @@
 import type { Metadata } from "next";
+import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-fraunces",
+  display: "swap",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
 const siteUrl = "https://travels.kiastartupconsult.com";
 
@@ -48,12 +64,21 @@ export const metadata: Metadata = {
     siteName: "KIA-Start Up Consult",
     locale: "en_GH",
     type: "website",
+    images: [
+      {
+        url: "/images/kia-logo.jpeg",
+        width: 800,
+        height: 600,
+        alt: "KIA-Start Up Consult — Global Careers & Travel",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "KIA-Start Up Consult | Your Partner in Global Careers",
     description:
       "Work abroad. Study abroad. Travel with confidence. Practical guidance for your international journey from Ghana to the world.",
+    images: ["/images/kia-logo.jpeg"],
   },
   robots: {
     index: true,
@@ -79,15 +104,15 @@ const jsonLd = {
       "@id": `${siteUrl}/#organization`,
       name: "KIA-Start Up Consult",
       url: siteUrl,
-      logo: `${siteUrl}/favicon.ico`,
-      image: `${siteUrl}/favicon.ico`,
+      logo: `${siteUrl}/images/kia-logo.jpeg`,
+      image: `${siteUrl}/images/kia-logo.jpeg`,
       description:
-        "KIA-Start Up Consult provides honest, practical guidance for Ghanaians seeking international career, study abroad, visa documentation, and travel opportunities.",
+        "KIA-Start Up Consult provides honest, practical guidance for Ghanaians seeking international career, study abroad, visa documentation, and travel opportunities, as well as B2B manpower recruitment partnerships.",
       telephone: "+233241332246",
       email: "info@kiastartupconsult.com",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Ajumako – Techiman Road, Adjacent DCE's Bangalore",
+        streetAddress: "Ajumako – Techiman Road, Adjacent DCE's Bungalow",
         addressLocality: "Ajumako",
         addressRegion: "Central Region",
         addressCountry: "GH",
@@ -134,8 +159,14 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${plusJakartaSans.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <head>
+        <GoogleAnalytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

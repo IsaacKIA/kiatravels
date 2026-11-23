@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { AlertTriangle } from "lucide-react";
+import { Suspense } from "react";
+import Link from "next/link";
+import { AlertTriangle, Building2, ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import TrackPageView from "@/components/TrackPageView";
-import EmptyState from "@/components/EmptyState";
-import JobCard from "@/components/JobCard";
-import { jobs, jobSectors, type JobStatus } from "@/data/jobs";
+import JobsExplorer from "@/components/JobsExplorer";
+import { jobs } from "@/data/jobs";
 import { siteConfig, buildWhatsAppLink } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -82,28 +83,7 @@ const jobsJsonLd = {
 };
 
 
-const statusTabs: { label: string; value: JobStatus | "all" }[] = [
-  { label: "All Listings", value: "all" },
-  { label: "Active", value: "open" },
-  { label: "Opening Soon", value: "upcoming" },
-  { label: "Closed", value: "closed" },
-];
-
-export default function JobsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ status?: string; sector?: string }>;
-}) {
-  // searchParams is a Promise in Next.js 16 App Router — read synchronously
-  // via React's use() or simply pass through; for static rendering we read
-  // directly. Next.js 16 makes searchParams async; unwrap inline:
-  return <JobsContent />;
-}
-
-// Separate component so we can keep the page export clean for metadata
-function JobsContent() {
-  const openCount = jobs.filter((j) => j.status === "open").length;
-
+export default function JobsPage() {
   return (
     <>
       <script
@@ -123,60 +103,38 @@ function JobsContent() {
           ),
           external: true,
         }}
-        secondaryCta={{ label: "Send an Enquiry", href: "/contact?service=work-abroad" }}
+        secondaryCta={{ label: "For Employers & HR Agencies", href: "/partners" }}
       />
 
-      {/* Sector pills */}
-      <section className="border-b border-line bg-white">
-        <div className="mx-auto max-w-6xl px-5 py-6 sm:px-8">
-          <p className="mb-3 text-xs font-bold uppercase tracking-wider text-charcoal-soft">
-            Sectors we cover
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {jobSectors.map((sector) => (
-              <span
-                key={sector}
-                className="rounded-full border border-line bg-slate-50 px-3.5 py-1.5 text-xs font-semibold text-charcoal"
-              >
-                {sector}
-              </span>
-            ))}
+      <Suspense
+        fallback={
+          <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+            <div className="h-96 animate-pulse rounded-2xl border border-line bg-white" />
           </div>
-        </div>
-      </section>
+        }
+      >
+        <JobsExplorer />
+      </Suspense>
 
-      {/* Listings */}
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      {/* B2B Partner Strip */}
+      <section className="border-y border-slate-800 bg-[#0f172a] text-white">
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-5 py-10 sm:px-8 lg:flex-row lg:items-center">
           <div>
-            <h2 className="font-display text-2xl text-ink sm:text-3xl">
-              Current openings
-            </h2>
-            {openCount > 0 && (
-              <p className="mt-1 text-sm text-charcoal-soft">
-                {openCount} active listing{openCount !== 1 ? "s" : ""} available right now
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="mt-10">
-          {jobs.length === 0 ? (
-            <EmptyState
-              title="No live opportunities right now"
-              description="We don't have any verified openings posted at the moment. Talk to an advisor and we'll let you know what's genuinely available for your background and goals."
-              ctaLabel="Talk to an Advisor"
-              ctaHref={buildWhatsAppLink(
-                "Hi, are there any job opportunities available right now?"
-              )}
-            />
-          ) : (
-            <div className="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-              {jobs.map((job) => (
-                <JobCard key={job.slug} job={job} />
-              ))}
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
+              <Building2 className="h-4 w-4" />
+              <span>International Employers &amp; Recruitment Agencies</span>
             </div>
-          )}
+            <h2 className="mt-1 font-display text-xl font-bold text-white sm:text-2xl">
+              Need vetted Ghanaian candidates for your GCC or European demand orders?
+            </h2>
+          </div>
+          <Link
+            href="/partners"
+            className="focus-ring inline-flex shrink-0 items-center gap-2 rounded-xl bg-amber-400 px-6 py-3.5 text-xs font-bold text-slate-950 shadow-sm transition-all hover:bg-amber-300"
+          >
+            <span>Explore B2B Manpower Partnerships</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 

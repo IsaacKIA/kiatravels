@@ -8,14 +8,15 @@ import {
   X,
   ChevronDown,
   MessageCircle,
-  Sparkles,
   Globe2,
   Briefcase,
   GraduationCap,
   FileCheck,
   Plane,
   Compass,
+  Building2,
   ArrowRight,
+  ArrowUpRight,
   PhoneCall,
   Home,
   Info,
@@ -34,11 +35,11 @@ const serviceIcons: Record<string, typeof Briefcase> = {
 };
 
 const serviceBadges: Record<string, string> = {
-  "work-abroad": "UK & Germany",
-  "study-abroad": "Fall 2026",
-  "visa-assistance": "98% Success",
-  "flight-booking": "Best Fares",
-  "travel-tourism": "Custom Trips",
+  "work-abroad": "Europe & GCC",
+  "study-abroad": "2026/27 Intakes",
+  "visa-assistance": "98% Accuracy",
+  "flight-booking": "Group & Direct",
+  "travel-tourism": "Tours & DMC",
 };
 
 export default function Navbar() {
@@ -49,7 +50,6 @@ export default function Navbar() {
   const [menuTop, setMenuTop] = useState(60);
 
   const headerRef = useRef<HTMLElement>(null);
-  const announcementRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const [servicesOpen, setServicesOpen] = useDisclosure(servicesRef);
@@ -62,7 +62,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Measure true header bottom for mobile menu positioning
   useEffect(() => {
     const measure = () => {
       if (headerRef.current) {
@@ -109,37 +108,36 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Ticker / Live Announcement Ribbon */}
-      <div ref={announcementRef} className="relative z-50 bg-[#0f172a] px-4 py-2 text-white border-b border-slate-800">
+      {/* Top Executive Announcement Bar */}
+      <div className="relative z-50 border-b border-slate-800 bg-[#0f172a] px-4 py-2 text-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between text-[11px] sm:text-xs">
-          <div className="flex items-center gap-2 overflow-hidden">
-            <span className="flex h-2 w-2 relative shrink-0">
+          <div className="flex items-center gap-2.5 overflow-hidden">
+            <span className="relative flex h-2 w-2 shrink-0">
               <span className="pulse-radar absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
             <span className="truncate font-medium text-slate-300">
-              <strong className="text-amber-400">Intakes Open:</strong> Fall 2026/2027 University Admissions &amp; Global Work Visas
+              <strong className="text-amber-400">Active Mandates:</strong> Europe &amp; GCC Work
+              Placements &bull; 2026/2027 University Admissions &bull; Global Travel &amp; DMC
             </span>
           </div>
 
           <div className="hidden items-center gap-5 sm:flex shrink-0">
             <a
               href={`tel:${siteConfig.phoneLocalHref}`}
-              className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors"
+              className="flex items-center gap-1.5 text-slate-300 transition-colors hover:text-white"
             >
               <PhoneCall className="h-3 w-3 text-amber-400" />
               <span>{siteConfig.phoneLocal}</span>
             </a>
-            <span className="text-slate-600">|</span>
-            <a
-              href={`https://wa.me/${siteConfig.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+            <span className="text-slate-700">|</span>
+            <Link
+              href="/partners"
+              className="flex items-center gap-1 font-semibold text-amber-400 transition-colors hover:text-amber-300"
             >
-              <Sparkles className="h-3 w-3" />
-              <span>Free 15-min Consultation</span>
-            </a>
+              <Building2 className="h-3.5 w-3.5" />
+              <span>B2B &amp; Institutional Partners →</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -150,14 +148,14 @@ export default function Navbar() {
         className={`sticky top-0 z-[70] transition-all duration-300 ${
           scrolled
             ? "floating-nav py-2.5 shadow-lg backdrop-blur-xl"
-            : "bg-white/80 py-3.5 backdrop-blur-md border-b border-line/60"
+            : "border-b border-line/60 bg-white/85 py-3.5 backdrop-blur-md"
         }`}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 sm:px-8">
           {/* Logo */}
           <Link
             href="/"
-            className="focus-ring flex items-center gap-3 rounded-xl group"
+            className="focus-ring group flex items-center gap-3 rounded-xl"
             aria-label="KIA-Start Up Consult home"
           >
             <Image
@@ -165,24 +163,29 @@ export default function Navbar() {
               alt="KIA-Start Up Consult"
               width={168}
               height={70}
-              className="h-9 w-auto sm:h-10 transition-transform group-hover:scale-105"
+              className="h-9 w-auto transition-transform group-hover:scale-105 sm:h-10"
               priority
             />
-            <span className="hidden xl:inline-block rounded-full border border-amber-500/20 bg-amber-50 px-2.5 py-0.5 text-[10px] font-bold text-amber-900 tracking-wide">
-              Global Careers &amp; Travel
-            </span>
+            <div className="hidden border-l border-line pl-3 xl:block">
+              <span className="block text-[11px] font-extrabold uppercase tracking-wider text-ink">
+                KIA-Start Up Consult
+              </span>
+              <span className="block text-[10px] font-medium text-charcoal-soft">
+                Global Careers, Study &amp; Travel
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
             <Link
               href="/"
-              className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
+              className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal transition-colors hover:bg-slate-100 hover:text-ink"
             >
               Home
             </Link>
 
-            {/* Services Dropdown with Rich Mega-Menu */}
+            {/* Services Rich Mega-Menu */}
             <div
               ref={servicesRef}
               className="relative"
@@ -194,7 +197,7 @@ export default function Navbar() {
                 onClick={() => setServicesOpen((v) => !v)}
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
-                className="focus-ring flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
+                className="focus-ring flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal transition-colors hover:bg-slate-100 hover:text-ink"
               >
                 <span>Services</span>
                 <ChevronDown
@@ -206,25 +209,25 @@ export default function Navbar() {
               </button>
 
               {servicesOpen && (
-                <div className="absolute left-0 top-full z-50 mt-2 w-[600px] max-w-[calc(100vw-3rem)] rounded-2xl border border-line bg-white/98 p-6 shadow-2xl backdrop-blur-xl animate-dropdown-in">
+                <div className="animate-dropdown-in absolute left-0 top-full z-50 mt-2 w-[620px] max-w-[calc(100vw-3rem)] rounded-2xl border border-line bg-white/98 p-6 shadow-2xl backdrop-blur-xl">
                   <div className="mb-4 flex items-center justify-between border-b border-line/70 pb-3">
                     <p className="text-xs font-bold uppercase tracking-wider text-amber-800">
-                      Our Specialized Travel &amp; Career Pathways
+                      Global Mobility, Education &amp; Travel Practices
                     </p>
                     <div className="flex items-center gap-3">
                       <Link
                         href="/jobs"
                         onClick={() => setServicesOpen(false)}
-                        className="text-xs font-bold text-emerald-700 hover:text-emerald-600 flex items-center gap-1"
+                        className="flex items-center gap-1 text-xs font-bold text-emerald-700 hover:text-emerald-600"
                       >
-                        <span>Job Listings</span>
+                        <span>Active Job Listings</span>
                         <ArrowRight className="h-3 w-3" />
                       </Link>
                       <span className="text-line">|</span>
                       <Link
                         href="/services"
                         onClick={() => setServicesOpen(false)}
-                        className="text-xs font-bold text-charcoal hover:text-amber-700 flex items-center gap-1"
+                        className="flex items-center gap-1 text-xs font-bold text-charcoal hover:text-amber-700"
                       >
                         <span>All Services</span>
                         <ArrowRight className="h-3 w-3" />
@@ -242,18 +245,18 @@ export default function Navbar() {
                           key={service.slug}
                           href={service.href}
                           onClick={() => setServicesOpen(false)}
-                          className="group flex items-start gap-3.5 rounded-xl p-3 hover:bg-slate-50 transition-all border border-transparent hover:border-line"
+                          className="group flex items-start gap-3.5 rounded-xl border border-transparent p-3 transition-all hover:border-line hover:bg-slate-50"
                         >
-                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-800 transition-transform group-hover:scale-110 group-hover:bg-ink group-hover:text-white">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-800 transition-transform group-hover:scale-110 group-hover:bg-ink group-hover:text-white">
                             <Icon className="h-5 w-5" />
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <h4 className="text-sm font-bold text-ink group-hover:text-amber-800 transition-colors">
+                              <h4 className="text-sm font-bold text-ink transition-colors group-hover:text-amber-800">
                                 {service.title}
                               </h4>
                               {badge && (
-                                <span className="rounded bg-amber-100/70 px-1.5 py-0.5 text-[9px] font-bold text-amber-900">
+                                <span className="rounded-md bg-amber-100/80 px-1.5 py-0.5 text-[9px] font-bold text-amber-900">
                                   {badge}
                                 </span>
                               )}
@@ -265,33 +268,66 @@ export default function Navbar() {
                         </Link>
                       );
                     })}
+
+                    {/* 6th Mega-Menu Card: B2B Institutional Partnerships */}
+                    <Link
+                      href="/partners"
+                      onClick={() => setServicesOpen(false)}
+                      className="group flex items-start gap-3.5 rounded-xl border border-slate-800 bg-[#0f172a] p-3 text-white transition-all hover:bg-slate-900"
+                    >
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-400 text-slate-950 transition-transform group-hover:scale-110">
+                        <Building2 className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h4 className="text-sm font-bold text-white group-hover:text-amber-300">
+                            B2B Partnerships
+                          </h4>
+                          <span className="rounded-md bg-amber-400/20 px-1.5 py-0.5 text-[9px] font-bold text-amber-300">
+                            Corporate Desk
+                          </span>
+                        </div>
+                        <p className="mt-0.5 text-xs text-slate-300 line-clamp-1">
+                          Manpower supply, university admissions &amp; Ghana DMC.
+                        </p>
+                      </div>
+                    </Link>
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-transparent p-3.5 border border-amber-500/20 flex items-center justify-between">
+                  <div className="mt-4 flex items-center justify-between rounded-xl border border-amber-500/20 bg-gradient-to-r from-amber-500/10 via-orange-500/5 to-transparent p-3.5">
                     <div>
-                      <p className="text-xs font-bold text-ink">Not sure where to start?</p>
-                      <p className="text-[11px] text-charcoal-soft">Take our 60-second pathway matcher below.</p>
+                      <p className="text-xs font-bold text-ink">
+                        Unsure which visa or career pathway fits your profile?
+                      </p>
+                      <p className="text-[11px] text-charcoal-soft">
+                        Use our interactive 3-step Eligibility &amp; Pathway Assessment tool.
+                      </p>
                     </div>
                     <a
                       href="/#matcher"
                       onClick={() => setServicesOpen(false)}
-                      className="rounded-lg bg-ink px-3 py-1.5 text-xs font-bold text-white hover:bg-charcoal transition-colors"
+                      className="rounded-lg bg-ink px-3.5 py-2 text-xs font-bold text-white transition-colors hover:bg-charcoal"
                     >
-                      Find Pathway →
+                      Assess Eligibility →
                     </a>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Direct Quick Link to Destination Explorer */}
-            <a
-              href="/#destinations"
-              className="focus-ring flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
+            <Link
+              href="/jobs"
+              className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal transition-colors hover:bg-slate-100 hover:text-ink"
             >
-              <Globe2 className="h-4 w-4 text-blue-600" />
-              <span>Explore Countries</span>
-            </a>
+              Jobs
+            </Link>
+
+            <Link
+              href="/partners"
+              className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal transition-colors hover:bg-slate-100 hover:text-ink"
+            >
+              Partners (B2B)
+            </Link>
 
             {/* About Dropdown */}
             <div
@@ -305,7 +341,7 @@ export default function Navbar() {
                 onClick={() => setAboutOpen((v) => !v)}
                 aria-expanded={aboutOpen}
                 aria-haspopup="true"
-                className="focus-ring flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
+                className="focus-ring flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal transition-colors hover:bg-slate-100 hover:text-ink"
               >
                 <span>About</span>
                 <ChevronDown
@@ -317,7 +353,7 @@ export default function Navbar() {
               </button>
 
               {aboutOpen && (
-                <div className="absolute left-0 top-full z-50 mt-2 w-56 rounded-2xl border border-line bg-white p-2.5 shadow-2xl backdrop-blur-xl animate-dropdown-in">
+                <div className="animate-dropdown-in absolute left-0 top-full z-50 mt-2 w-60 rounded-2xl border border-line bg-white p-2.5 shadow-2xl backdrop-blur-xl">
                   <ul className="space-y-0.5">
                     {aboutMenu.map((item) => (
                       <li key={item.label}>
@@ -337,14 +373,14 @@ export default function Navbar() {
 
             <Link
               href="/insights"
-              className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
+              className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal transition-colors hover:bg-slate-100 hover:text-ink"
             >
               Insights
             </Link>
 
             <Link
               href="/contact"
-              className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
+              className="focus-ring rounded-lg px-3.5 py-2 text-sm font-semibold text-charcoal transition-colors hover:bg-slate-100 hover:text-ink"
             >
               Contact
             </Link>
@@ -358,7 +394,7 @@ export default function Navbar() {
               rel="noopener noreferrer"
               onClick={() => trackEvent("whatsapp_click", { location: "navbar" })}
               aria-label="Chat on WhatsApp"
-              className="focus-ring group relative flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-white shadow-sm transition-all hover:bg-emerald-600 hover:scale-105"
+              className="focus-ring group relative flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500 text-white shadow-sm transition-all hover:scale-105 hover:bg-emerald-600"
             >
               <MessageCircle className="h-5 w-5" />
               <span className="pulse-radar absolute -top-1 -right-1 h-3 w-3 rounded-full bg-emerald-400" />
@@ -370,7 +406,7 @@ export default function Navbar() {
           {/* Mobile Hamburger Toggle */}
           <button
             type="button"
-            className="focus-ring flex h-10 w-10 items-center justify-center rounded-xl p-2 text-ink hover:bg-slate-100 lg:hidden transition-colors"
+            className="focus-ring flex h-10 w-10 items-center justify-center rounded-xl p-2 text-ink transition-colors hover:bg-slate-100 lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             onClick={toggleMobileMenu}
@@ -380,41 +416,26 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Slide-Down Menu Sheet & Backdrop */}
+      {/* Mobile Slide-Down Menu Sheet */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] lg:hidden">
-          {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-slate-950/45 backdrop-blur-xs transition-opacity animate-modal-backdrop"
+            className="animate-modal-backdrop fixed inset-0 bg-slate-950/45 backdrop-blur-xs transition-opacity"
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
 
-          {/* Slide-Down Menu Panel */}
           <div
-            className="fixed inset-x-0 bottom-0 z-[60] flex flex-col bg-white shadow-2xl overflow-y-auto animate-stamp-in overscroll-contain"
+            className="animate-stamp-in fixed inset-x-0 bottom-0 z-[60] flex flex-col overflow-y-auto overscroll-contain bg-white shadow-2xl"
             style={{ top: `${menuTop}px` }}
           >
-            {/* Top gold accent ribbon */}
-            <div className="h-[2px] bg-gradient-to-r from-amber-500 via-amber-400 to-emerald-500 shrink-0" />
+            <div className="h-[2px] shrink-0 bg-gradient-to-r from-amber-500 via-amber-400 to-emerald-500" />
 
-            {/* Live Admissions ribbon inside menu */}
-            <div className="flex items-center justify-between border-b border-line/60 bg-amber-50/70 px-5 py-2.5 text-xs text-amber-950 font-medium shrink-0">
-              <div className="flex items-center gap-2 overflow-hidden">
-                <Sparkles className="h-3.5 w-3.5 text-amber-600 shrink-0" />
-                <span className="truncate">Fall 2026/2027 Intakes Open &bull; Ghana to Global</span>
-              </div>
-              <span className="shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
-                Active
-              </span>
-            </div>
-
-            {/* Main Navigation Links */}
-            <nav className="flex-1 p-4 space-y-2">
+            <nav className="flex-1 space-y-2 p-4">
               <Link
                 href="/"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-bold text-ink hover:bg-slate-50 transition-colors"
+                className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-bold text-ink transition-colors hover:bg-slate-50"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-slate-700">
                   <Home className="h-4 w-4" />
@@ -423,18 +444,18 @@ export default function Navbar() {
               </Link>
 
               {/* Mobile Services Accordion */}
-              <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 overflow-hidden">
+              <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-50/50">
                 <button
                   type="button"
                   onClick={() => setMobileServicesOpen((v) => !v)}
-                  className="flex w-full items-center justify-between p-3.5 text-left text-base font-bold text-ink hover:bg-slate-100/70 transition-colors"
+                  className="flex w-full items-center justify-between p-3.5 text-left text-base font-bold text-ink transition-colors hover:bg-slate-100/70"
                   aria-expanded={mobileServicesOpen}
                 >
                   <div className="flex items-center gap-3">
                     <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 text-amber-900">
                       <Briefcase className="h-4 w-4" />
                     </div>
-                    <span>Services</span>
+                    <span>Services &amp; Practices</span>
                   </div>
                   <ChevronDown
                     className={`h-5 w-5 text-slate-500 transition-transform duration-200 ${
@@ -444,22 +465,13 @@ export default function Navbar() {
                 </button>
 
                 {mobileServicesOpen && (
-                  <div className="border-t border-slate-200/70 p-2 space-y-1.5 bg-white">
-                    <Link
-                      href="/services"
-                      onClick={() => setMobileOpen(false)}
-                      className="flex items-center justify-between rounded-xl bg-amber-50 px-3.5 py-2.5 text-xs font-bold text-amber-950 hover:bg-amber-100 transition-colors"
-                    >
-                      <span>Explore All 5 Services</span>
-                      <ArrowRight className="h-3.5 w-3.5 text-amber-800" />
-                    </Link>
-
+                  <div className="space-y-1.5 border-t border-slate-200/70 bg-white p-2">
                     <Link
                       href="/jobs"
                       onClick={() => setMobileOpen(false)}
-                      className="flex items-center justify-between rounded-xl bg-emerald-50 px-3.5 py-2.5 text-xs font-bold text-emerald-900 hover:bg-emerald-100 transition-colors"
+                      className="flex items-center justify-between rounded-xl bg-emerald-50 px-3.5 py-2.5 text-xs font-bold text-emerald-900 transition-colors hover:bg-emerald-100"
                     >
-                      <span>🌍 Job Opportunities</span>
+                      <span>Active Overseas Job Openings</span>
                       <ArrowRight className="h-3.5 w-3.5 text-emerald-800" />
                     </Link>
 
@@ -472,7 +484,7 @@ export default function Navbar() {
                           key={service.slug}
                           href={service.href}
                           onClick={() => setMobileOpen(false)}
-                          className="flex items-center justify-between rounded-xl p-2.5 hover:bg-slate-50 transition-colors"
+                          className="flex items-center justify-between rounded-xl p-2.5 transition-colors hover:bg-slate-50"
                         >
                           <div className="flex items-center gap-2.5">
                             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-50 text-amber-800">
@@ -480,11 +492,13 @@ export default function Navbar() {
                             </div>
                             <div>
                               <p className="text-sm font-bold text-ink">{service.title}</p>
-                              <p className="text-[11px] text-charcoal-soft line-clamp-1">{service.description}</p>
+                              <p className="text-[11px] text-charcoal-soft line-clamp-1">
+                                {service.description}
+                              </p>
                             </div>
                           </div>
                           {badge && (
-                            <span className="shrink-0 rounded bg-amber-100/80 px-2 py-0.5 text-[9px] font-bold text-amber-900 ml-2">
+                            <span className="ml-2 shrink-0 rounded bg-amber-100/80 px-2 py-0.5 text-[9px] font-bold text-amber-900">
                               {badge}
                             </span>
                           )}
@@ -495,48 +509,78 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Mobile Explore Countries Link */}
+              {/* Mobile B2B Partnerships */}
+              <Link
+                href="/partners"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-between rounded-2xl border border-slate-800 bg-[#0f172a] p-3.5 text-white"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-400 text-slate-950">
+                    <Building2 className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <span className="block text-sm font-bold text-white">
+                      B2B &amp; Institutional Partners
+                    </span>
+                    <span className="block text-[11px] text-slate-300">
+                      Workforce, Universities &amp; Ghana DMC
+                    </span>
+                  </div>
+                </div>
+                <ArrowUpRight className="h-4 w-4 text-amber-400" />
+              </Link>
+
+              {/* Mobile Explore Countries */}
               <a
                 href="/#destinations"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between rounded-2xl p-3.5 text-base font-bold text-blue-900 bg-gradient-to-r from-blue-50 to-indigo-50/60 border border-blue-200/70 hover:from-blue-100 hover:to-indigo-100 transition-all"
+                className="flex items-center justify-between rounded-2xl border border-blue-200/70 bg-gradient-to-r from-blue-50 to-indigo-50/60 p-3.5 text-base font-bold text-blue-900"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white shadow-xs">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
                     <Globe2 className="h-4 w-4" />
                   </div>
                   <div>
-                    <span className="block text-sm font-bold text-blue-950">Explore 15+ Countries</span>
-                    <span className="block text-[11px] font-medium text-blue-700/80">UK, Canada, Germany, USA &amp; more</span>
+                    <span className="block text-sm font-bold text-blue-950">
+                      Explore 15+ Destinations
+                    </span>
+                    <span className="block text-[11px] font-medium text-blue-700/80">
+                      UK, Canada, Germany, UAE &amp; Europe
+                    </span>
                   </div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-blue-600" />
               </a>
 
-              {/* Mobile Insights & Guides Link */}
+              {/* Mobile Insights */}
               <Link
                 href="/insights"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between rounded-2xl p-3.5 text-base font-bold text-amber-950 bg-gradient-to-r from-amber-50 to-orange-50/60 border border-amber-200/70 hover:from-amber-100 hover:to-orange-100 transition-all"
+                className="flex items-center justify-between rounded-2xl border border-amber-200/70 bg-gradient-to-r from-amber-50 to-orange-50/60 p-3.5 text-base font-bold text-amber-950"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-600 text-white shadow-xs">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-600 text-white">
                     <BookOpen className="h-4 w-4" />
                   </div>
                   <div>
-                    <span className="block text-sm font-bold text-amber-950">Insights &amp; Guides</span>
-                    <span className="block text-[11px] font-medium text-amber-800/80">Visa guides, work permits &amp; advice</span>
+                    <span className="block text-sm font-bold text-amber-950">
+                      Insights &amp; Guides
+                    </span>
+                    <span className="block text-[11px] font-medium text-amber-800/80">
+                      Work permits, proof of funds &amp; visa advice
+                    </span>
                   </div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-amber-600" />
               </Link>
 
               {/* Mobile About Accordion */}
-              <div className="rounded-2xl border border-slate-200/80 bg-slate-50/50 overflow-hidden">
+              <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-50/50">
                 <button
                   type="button"
                   onClick={() => setMobileAboutOpen((v) => !v)}
-                  className="flex w-full items-center justify-between p-3.5 text-left text-base font-bold text-ink hover:bg-slate-100/70 transition-colors"
+                  className="flex w-full items-center justify-between p-3.5 text-left text-base font-bold text-ink"
                   aria-expanded={mobileAboutOpen}
                 >
                   <div className="flex items-center gap-3">
@@ -553,13 +597,13 @@ export default function Navbar() {
                 </button>
 
                 {mobileAboutOpen && (
-                  <div className="border-t border-slate-200/70 p-2 space-y-1 bg-white">
+                  <div className="space-y-1 border-t border-slate-200/70 bg-white p-2">
                     {aboutMenu.map((item) => (
                       <Link
                         key={item.label}
                         href={item.href}
                         onClick={() => setMobileOpen(false)}
-                        className="block rounded-lg px-3 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink transition-colors"
+                        className="block rounded-lg px-3 py-2 text-sm font-semibold text-charcoal hover:bg-slate-100 hover:text-ink"
                       >
                         {item.label}
                       </Link>
@@ -568,11 +612,10 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Contact Us */}
               <Link
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 rounded-2xl p-3.5 text-base font-bold text-ink hover:bg-slate-50 transition-colors"
+                className="flex items-center gap-3 rounded-2xl p-3.5 text-base font-bold text-ink hover:bg-slate-50"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 text-amber-900">
                   <PhoneCall className="h-4 w-4" />
@@ -581,36 +624,24 @@ export default function Navbar() {
               </Link>
             </nav>
 
-            {/* Mobile Actions & Direct Touchpoints */}
-            <div className="border-t border-line/80 bg-slate-50 p-5 space-y-3 shrink-0">
+            <div className="shrink-0 space-y-3 border-t border-line/80 bg-slate-50 p-5">
               <a
                 href={`https://wa.me/${siteConfig.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackEvent("whatsapp_click", { location: "mobile_menu" })}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] py-3.5 text-sm font-bold text-white shadow-md active:scale-98 transition-all"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#20bd5a]"
               >
                 <MessageCircle className="h-5 w-5" />
                 <span>Chat on WhatsApp (Online)</span>
               </a>
 
               <StartJourneyButton
-                className="shimmer-btn group flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white shadow-md active:scale-98 transition-all"
+                className="shimmer-btn group flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white shadow-md transition-all"
                 onOpenChange={(open) => {
                   if (open) setMobileOpen(false);
                 }}
               />
-
-              <div className="pt-2 flex items-center justify-between text-xs text-charcoal-soft border-t border-line/60">
-                <a
-                  href={`tel:${siteConfig.phoneLocalHref}`}
-                  className="flex items-center gap-1.5 font-bold text-slate-800 hover:text-amber-800 transition-colors"
-                >
-                  <PhoneCall className="h-3.5 w-3.5 text-amber-700" />
-                  <span>{siteConfig.phoneLocal}</span>
-                </a>
-                <span className="text-[11px] text-slate-500">Accra, Ghana</span>
-              </div>
             </div>
           </div>
         </div>

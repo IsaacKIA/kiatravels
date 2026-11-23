@@ -6,7 +6,7 @@ import { jobTypeLabels, jobStatusStyles, jobStatusLabels } from "@/data/jobs";
 
 export default function JobCard({ job }: { job: Job }) {
   return (
-    <article className="glass-card-hover group relative flex flex-col rounded-2xl border border-line bg-white shadow-sm transition-all hover:border-amber-400 hover:shadow-md overflow-hidden">
+    <article className="glass-card-hover group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all hover:border-amber-400 hover:shadow-md">
       {/* Hero image */}
       {job.image && (
         <div className="relative h-44 w-full shrink-0 overflow-hidden">
@@ -17,9 +17,7 @@ export default function JobCard({ job }: { job: Job }) {
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          {/* Gradient scrim */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-          {/* Status badge on image */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
           <span
             className={`absolute bottom-3 left-3 rounded-full border px-2.5 py-0.5 text-[10px] font-bold backdrop-blur-sm ${jobStatusStyles[job.status]}`}
           >
@@ -29,9 +27,8 @@ export default function JobCard({ job }: { job: Job }) {
       )}
 
       {/* Card body */}
-      <div className="flex flex-col flex-1 justify-between p-6">
+      <div className="flex flex-1 flex-col justify-between p-6">
         <div>
-          {/* Header: country + status badge (only show badge here when no image) */}
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <p className="flex items-center gap-1.5 text-xs font-bold text-charcoal-soft">
@@ -57,14 +54,12 @@ export default function JobCard({ job }: { job: Job }) {
             )}
           </div>
 
-          {/* Description */}
           {job.description && (
             <p className="mt-3.5 text-sm leading-relaxed text-charcoal-soft line-clamp-2">
               {job.description}
             </p>
           )}
 
-          {/* Meta pills: type + salary */}
           <div className="mt-4 flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1 rounded-md border border-line bg-slate-50 px-2.5 py-1 text-[11px] font-bold text-charcoal">
               <Clock className="h-3 w-3 text-slate-500" aria-hidden />
@@ -78,7 +73,6 @@ export default function JobCard({ job }: { job: Job }) {
             )}
           </div>
 
-          {/* Key requirements */}
           {job.requirements && job.requirements.length > 0 && (
             <ul className="mt-4 space-y-1 text-xs text-charcoal-soft">
               {job.requirements.slice(0, 3).map((req) => (
@@ -90,7 +84,6 @@ export default function JobCard({ job }: { job: Job }) {
             </ul>
           )}
 
-          {/* Deadline */}
           {job.applicationDeadline && (
             <p className="mt-4 flex items-center gap-1.5 text-xs text-charcoal-soft">
               <CalendarClock className="h-3.5 w-3.5 shrink-0 text-amber-600" aria-hidden />
@@ -99,7 +92,6 @@ export default function JobCard({ job }: { job: Job }) {
           )}
         </div>
 
-        {/* Footer actions */}
         <div className="mt-6 flex items-center gap-3 border-t border-line/60 pt-4">
           <Link
             href={`/contact?job=${job.slug}`}

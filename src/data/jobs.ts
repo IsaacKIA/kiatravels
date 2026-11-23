@@ -392,6 +392,58 @@ export const jobs: Job[] = [
     status: "open",
     image: "/images/jobs-dubai-driving.jpg",
   },
+
+  // 6. Electrical & Industrial Trades
+  {
+    slug: "gcc-europe-electrical-technicians",
+    country: "UAE & Europe",
+    countryFlagEmoji: "🇦🇪",
+    title: "Certified Electricians & Electrical Technicians",
+    sector: "Construction & Trades",
+    type: "full-time",
+    salary: "2,200 AED – 3,800 AED / EUR 1,500+",
+    description:
+      "Immediate placements for industrial, commercial, and domestic electricians across UAE, Saudi Arabia, and European industrial projects.",
+    requirements: [
+      "Valid international passport",
+      "Practical electrical installation & maintenance experience",
+      "Trade certificate, NVTI, or HND Electrical Engineering",
+      "Adherence to international HSE safety standards",
+    ],
+    benefits: [
+      "Accommodation & site transportation provided",
+      "Overtime pay + 2-year renewable work permit",
+      "Return flight ticket & medical insurance included",
+    ],
+    status: "open",
+    featured: true,
+    image: "/images/Electrician worker.png",
+  },
+
+  // 7. Plumbing, Pipefitting & Mechanical Trades
+  {
+    slug: "gcc-europe-plumbing-pipefitting",
+    country: "UAE & Europe",
+    countryFlagEmoji: "🇪🇺",
+    title: "Plumbers, Pipefitters & HVAC Technicians",
+    sector: "Construction & Trades",
+    type: "full-time",
+    salary: "2,000 AED – 3,500 AED / EUR 1,400+",
+    description:
+      "Skilled plumbing, pipefitting, and mechanical facility technicians needed for commercial construction and facility maintenance contracts.",
+    requirements: [
+      "Valid international passport",
+      "Minimum 2 years practical plumbing or pipefitting experience",
+      "Ability to read technical layouts and pass practical trade tests",
+    ],
+    benefits: [
+      "Free employer accommodation & transport",
+      "Tax-free GCC salary or full European Type-D work package",
+      "Full visa processing & flight dispatch support",
+    ],
+    status: "open",
+    image: "/images/plumber work.png",
+  },
 ];
 
 // Sectors KIA helps clients explore — not a claim of current vacancies.

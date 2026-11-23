@@ -10,7 +10,8 @@ export const siteConfig = {
   phoneIntlHref: "+447859215186",
   whatsappNumber: "233241332246", // used for wa.me links, no + or spaces
   email: "info@kiastartupconsult.com",
-  address: "Ajumako – Techiman Road, Adjacent DCE's Bangalore",
+  address: "Ajumako – Techiman Road, Adjacent DCE's Bungalow, Central Region, Ghana",
+  businessHours: "Monday – Saturday: 8:00 AM – 6:00 PM (GMT)",
   siteUrl: "https://travels.kiastartupconsult.com",
 };
 
@@ -87,6 +88,7 @@ export const servicesMenu = {
 
 export const aboutMenu: NavLink[] = [
   { label: "Who We Are", href: "/about" },
+  { label: "Employer & Agency Partners", href: "/partners" },
   { label: "Our Approach", href: "/about#approach" },
   { label: "Why KIA", href: "/about#values" },
   { label: "FAQ", href: "/faq" },
@@ -179,9 +181,16 @@ export function buildWhatsAppLink(message: string) {
   return `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
-// Simple client-side analytics hook point. Swap the console.log for a real
-// analytics provider (GA4, Plausible, etc.) without touching call sites.
+// Client-side analytics hook point — forwards events to GA4 gtag when loaded.
 export function trackEvent(eventName: string, payload?: Record<string, unknown>) {
   if (typeof window === "undefined") return;
-  console.log("[analytics]", eventName, payload ?? {});
+  const w = window as Window & {
+    gtag?: (command: string, action: string, params?: Record<string, unknown>) => void;
+  };
+  if (typeof w.gtag === "function") {
+    w.gtag("event", eventName, payload ?? {});
+  }
+  if (process.env.NODE_ENV === "development") {
+    console.log("[analytics]", eventName, payload ?? {});
+  }
 }

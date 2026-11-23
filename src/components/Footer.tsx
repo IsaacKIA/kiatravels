@@ -149,6 +149,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/partners" className="focus-ring hover:text-amber-400 font-semibold transition-colors text-emerald-400">
+                  Employer &amp; Agency Partnerships
+                </Link>
+              </li>
+              <li>
                 <Link href="/insights" className="focus-ring hover:text-amber-400 font-semibold transition-colors text-amber-300">
                   Insights &amp; Guides
                 </Link>
