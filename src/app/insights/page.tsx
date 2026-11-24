@@ -7,15 +7,6 @@ import TrackPageView from "@/components/TrackPageView";
 import { insightArticles } from "@/data/insights";
 import { siteConfig } from "@/data/site";
 
-const articleImages = [
-  "/images/Germany.png",
-  "/images/visa.png",
-  "/images/work abroad (2).png",
-  "/images/University area view.png",
-  "/images/Beautiful Dubai.png",
-  "/images/Visit Ghana.png",
-];
-
 export const metadata: Metadata = {
   title: "Travel & Career Insights | Visa Guides & Work Abroad Advice",
   description:
@@ -182,11 +173,11 @@ export default function InsightsPage() {
                   {/* Visual Photo Sidebar Banner */}
                   <div className="relative flex min-h-[280px] flex-col justify-end overflow-hidden bg-[#0f172a] p-8 text-white lg:col-span-4">
                     <Image
-                      src={articleImages[0]}
+                      src={featured.coverImage}
                       alt={featured.title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-[#0b0f17]/75 to-[#0b0f17]/30" />
                     <div className="relative z-10 space-y-3">
@@ -232,42 +223,58 @@ export default function InsightsPage() {
               {remaining.map((article) => (
                 <article
                   key={article.slug}
-                  className="flex flex-col justify-between rounded-2xl border border-line bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
                   <div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="rounded-full bg-slate-100 px-3 py-1 font-semibold text-charcoal">
-                        {article.category}
-                      </span>
-                      <span className="flex items-center gap-1 text-slate-400">
-                        <Clock className="h-3 w-3" />
-                        {article.readTime}
-                      </span>
-                    </div>
-
-                    <h4 className="mt-4 text-lg font-bold tracking-tight text-ink leading-snug">
-                      <Link href={`/insights/${article.slug}`} className="hover:text-amber-800 transition-colors">
-                        {article.title}
-                      </Link>
-                    </h4>
-
-                    <p className="mt-3 text-xs leading-relaxed text-charcoal-soft line-clamp-3">
-                      {article.excerpt}
-                    </p>
-
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {article.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-md bg-amber-50/60 px-2 py-0.5 text-[10px] font-medium text-amber-900 border border-amber-200/40"
-                        >
-                          {tag}
+                    {/* Magazine Cover Photo Header */}
+                    <Link
+                      href={`/insights/${article.slug}`}
+                      className="relative block h-48 w-full overflow-hidden bg-slate-900"
+                    >
+                      <Image
+                        src={article.coverImage}
+                        alt={article.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                      <div className="absolute inset-x-4 bottom-3 flex items-center justify-between text-xs">
+                        <span className="rounded-full bg-white/95 px-3 py-1 font-bold text-slate-900 shadow-sm backdrop-blur-sm">
+                          {article.category}
                         </span>
-                      ))}
+                        <span className="flex items-center gap-1 rounded-full bg-slate-950/70 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
+                          <Clock className="h-3 w-3 text-amber-400" />
+                          {article.readTime}
+                        </span>
+                      </div>
+                    </Link>
+
+                    <div className="p-6 pb-2">
+                      <h4 className="font-display text-lg font-bold leading-snug tracking-tight text-ink">
+                        <Link href={`/insights/${article.slug}`} className="transition-colors hover:text-amber-800">
+                          {article.title}
+                        </Link>
+                      </h4>
+
+                      <p className="mt-3 line-clamp-3 text-xs leading-relaxed text-charcoal-soft">
+                        {article.excerpt}
+                      </p>
+
+                      <div className="mt-4 flex flex-wrap gap-1.5">
+                        {article.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded-md border border-amber-200/40 bg-amber-50/60 px-2 py-0.5 text-[10px] font-medium text-amber-900"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="mt-6 flex items-center justify-between border-t border-line/70 pt-4">
+                  <div className="mx-6 mb-6 mt-5 flex items-center justify-between border-t border-line/70 pt-4">
                     <span className="text-[11px] text-slate-400">
                       {article.publishedAt}
                     </span>
@@ -276,7 +283,7 @@ export default function InsightsPage() {
                       className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-900 hover:text-amber-700"
                     >
                       <span>Read Guide</span>
-                      <ArrowRight className="h-3.5 w-3.5" />
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                     </Link>
                   </div>
                 </article>

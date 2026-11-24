@@ -2,6 +2,7 @@ export interface InsightArticle {
   slug: string;
   title: string;
   excerpt: string;
+  coverImage: string;
   category: "Work Abroad" | "Visa Advisory" | "Study Abroad" | "Travel Advice";
   readTime: string;
   publishedAt: string;
@@ -31,6 +32,7 @@ export const insightArticles: InsightArticle[] = [
     title: "The Complete 2026 Guide to Work Permits in Poland & Lithuania for Ghanaians",
     excerpt:
       "A realistic, transparent breakdown of the requirements, processing timelines, costs, and legal documentation needed to secure employment and legal residency in Poland and Lithuania from Ghana.",
+    coverImage: "/images/Germany.png",
     category: "Work Abroad",
     readTime: "6 min read",
     publishedAt: "2026-03-15",
@@ -111,6 +113,7 @@ export const insightArticles: InsightArticle[] = [
     title: "Bank Statements & Proof of Funds: What European Embassies in Accra Really Look For",
     excerpt:
       "Understand how consular officers assess Ghanaian bank statements, how to avoid 'lump sum deposit' red flags, and how to prove legitimate financial ties.",
+    coverImage: "/images/visa.png",
     category: "Visa Advisory",
     readTime: "5 min read",
     publishedAt: "2026-03-20",
@@ -182,6 +185,7 @@ export const insightArticles: InsightArticle[] = [
     title: "5 Red Flags of Fake Travel Agents in Ghana (And How to Protect Yourself)",
     excerpt:
       "Essential protection advice for Ghanaians looking to travel, study, or work abroad. Learn how to identify fraudulent recruiters and safeguard your hard-earned money.",
+    coverImage: "/images/Visit Ghana.png",
     category: "Travel Advice",
     readTime: "5 min read",
     publishedAt: "2026-03-25",
@@ -247,6 +251,7 @@ export const insightArticles: InsightArticle[] = [
     title: "Study in the UK vs Canada: Real Cost Comparison, Work Rights & Post-Study Visas for Ghanaian Students",
     excerpt:
       "Comparing tuition fees, living expenses, spouse accompaniment rules, and post-study work permits for Ghanaian students planning their 2026/2027 university intake.",
+    coverImage: "/images/University area view.png",
     category: "Study Abroad",
     readTime: "7 min read",
     publishedAt: "2026-03-28",
@@ -310,6 +315,7 @@ export const insightArticles: InsightArticle[] = [
     title: "Canada is Recruiting Medical Doctors: 5 Official Pathways for Physicians to Live & Work Permanently in 2026",
     excerpt:
       "Canada faces historic doctor shortages and has unlocked 5 dedicated immigration routes for qualified international physicians. Here is the verified, time-sensitive guide to Express Entry, PNPs, Atlantic, Rural, and Francophone pilots.",
+    coverImage: "/images/work abroad (2).png",
     category: "Work Abroad",
     readTime: "8 min read",
     publishedAt: "2026-04-06",
@@ -433,6 +439,7 @@ export const insightArticles: InsightArticle[] = [
     title: "Canada is Recruiting Skilled Tradespeople: How Carpenters, Plumbers & Machinists Can Immigrate in 2026",
     excerpt:
       "To meet ambitious national housing and infrastructure goals, Canada has prioritized carpenters, plumbers, machinists, and electricians with dedicated Express Entry category draws and fast-track Red Seal pathways.",
+    coverImage: "/images/plumber work.png",
     category: "Work Abroad",
     readTime: "7 min read",
     publishedAt: "2026-04-06",

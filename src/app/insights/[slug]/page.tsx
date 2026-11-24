@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
@@ -54,11 +55,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       modifiedTime: article.lastUpdated,
       authors: [article.author.name],
       tags: article.tags,
+      images: [{ url: article.coverImage, alt: article.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: article.title,
       description: article.excerpt,
+      images: [article.coverImage],
     },
   };
 }
@@ -83,6 +86,7 @@ export default async function InsightArticlePage({ params }: Props) {
     },
     headline: article.title,
     description: article.excerpt,
+    image: `${siteUrl}${encodeURI(article.coverImage)}`,
     datePublished: article.publishedAt,
     dateModified: article.lastUpdated,
     author: {
@@ -127,50 +131,63 @@ export default async function InsightArticlePage({ params }: Props) {
           </Link>
 
           {/* Article Header */}
-          <header className="rounded-3xl border border-line bg-white p-6 sm:p-10 shadow-sm">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900 uppercase tracking-wider">
-                {article.category}
-              </span>
-              <span className="flex items-center gap-1 text-xs text-slate-500">
-                <Clock className="h-3.5 w-3.5" />
-                {article.readTime}
-              </span>
-              <span className="flex items-center gap-1 text-xs text-slate-500">
-                <Calendar className="h-3.5 w-3.5" />
-                Updated {article.lastUpdated}
-              </span>
+          <header className="overflow-hidden rounded-3xl border border-line bg-white shadow-sm">
+            <div className="relative h-60 w-full bg-slate-900 sm:h-80">
+              <Image
+                src={article.coverImage}
+                alt={article.title}
+                fill
+                priority
+                sizes="(max-width: 896px) 100vw, 896px"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent" />
+              <div className="absolute bottom-5 left-6 right-6 flex flex-wrap items-center gap-3">
+                <span className="rounded-full bg-amber-400 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-950 shadow-sm">
+                  {article.category}
+                </span>
+                <span className="flex items-center gap-1 rounded-full bg-slate-950/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                  <Clock className="h-3.5 w-3.5 text-amber-400" />
+                  {article.readTime}
+                </span>
+                <span className="flex items-center gap-1 rounded-full bg-slate-950/70 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                  <Calendar className="h-3.5 w-3.5 text-amber-400" />
+                  Updated {article.lastUpdated}
+                </span>
+              </div>
             </div>
 
-            <h1 className="mt-4 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-4xl leading-tight">
-              {article.title}
-            </h1>
+            <div className="p-6 sm:p-10">
+              <h1 className="font-display text-2xl font-bold leading-tight tracking-tight text-ink sm:text-3xl lg:text-4xl">
+                {article.title}
+              </h1>
 
-            <p className="mt-4 text-sm leading-relaxed text-charcoal-soft sm:text-base">
-              {article.excerpt}
-            </p>
+              <p className="mt-4 text-sm leading-relaxed text-charcoal-soft sm:text-base">
+                {article.excerpt}
+              </p>
 
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-line/70 pt-6">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500 text-white font-bold text-sm">
-                  KIA
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-line/70 pt-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500 text-sm font-bold text-white">
+                    KIA
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-ink">{article.author.name}</p>
+                    <p className="text-[11px] text-slate-500">{article.author.role}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs font-bold text-ink">{article.author.name}</p>
-                  <p className="text-[11px] text-slate-500">{article.author.role}</p>
-                </div>
-              </div>
 
-              <div className="flex items-center gap-2">
-                <a
-                  href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(`Hi KIA Consult, I am inquiring about the article: "${article.title}"`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-emerald-700"
-                >
-                  <MessageCircle className="h-3.5 w-3.5" />
-                  <span>Discuss With Advisor</span>
-                </a>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(`Hi KIA Consult, I am inquiring about the article: "${article.title}"`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 px-3.5 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-emerald-700"
+                  >
+                    <MessageCircle className="h-3.5 w-3.5" />
+                    <span>Discuss With Advisor</span>
+                  </a>
+                </div>
               </div>
             </div>
           </header>
@@ -297,20 +314,32 @@ export default async function InsightArticlePage({ params }: Props) {
                   <Link
                     key={rel.slug}
                     href={`/insights/${rel.slug}`}
-                    className="group rounded-2xl border border-line bg-white p-5 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5"
+                    className="group overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
                   >
-                    <span className="text-[11px] font-semibold text-amber-800 uppercase tracking-wider">
-                      {rel.category}
-                    </span>
-                    <h4 className="mt-2 text-sm font-bold text-ink group-hover:text-amber-800 transition line-clamp-2">
-                      {rel.title}
-                    </h4>
-                    <p className="mt-2 text-xs text-charcoal-soft line-clamp-2">
-                      {rel.excerpt}
-                    </p>
-                    <div className="mt-4 flex items-center justify-between text-[11px] text-slate-400">
-                      <span>{rel.readTime}</span>
-                      <span className="font-bold text-amber-900 group-hover:underline">Read →</span>
+                    <div className="relative h-40 w-full overflow-hidden bg-slate-900">
+                      <Image
+                        src={rel.coverImage}
+                        alt={rel.title}
+                        fill
+                        sizes="(max-width: 640px) 100vw, 430px"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 to-transparent" />
+                      <span className="absolute bottom-3 left-4 rounded-full bg-white/95 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-slate-900">
+                        {rel.category}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <h4 className="font-display text-sm font-bold text-ink transition group-hover:text-amber-800 line-clamp-2">
+                        {rel.title}
+                      </h4>
+                      <p className="mt-2 text-xs text-charcoal-soft line-clamp-2">
+                        {rel.excerpt}
+                      </p>
+                      <div className="mt-4 flex items-center justify-between text-[11px] text-slate-400">
+                        <span>{rel.readTime}</span>
+                        <span className="font-bold text-amber-900 group-hover:underline">Read →</span>
+                      </div>
                     </div>
                   </Link>
                 ))}
