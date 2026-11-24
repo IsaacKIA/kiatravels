@@ -92,7 +92,13 @@ export default function JobCard({ job }: { job: Job }) {
           )}
         </div>
 
-        <div className="mt-6 flex items-center gap-3 border-t border-line/60 pt-4">
+        <div className="mt-6 flex items-center gap-2.5 border-t border-line/60 pt-4">
+          <Link
+            href={`/jobs/${job.slug}`}
+            className="focus-ring inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border border-line bg-slate-50 px-3.5 py-2.5 text-xs font-bold text-ink transition-all hover:border-amber-400 hover:bg-white"
+          >
+            <span>View Details</span>
+          </Link>
           <Link
             href={`/contact?job=${job.slug}`}
             className="focus-ring shimmer-btn inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-bold text-white shadow-sm transition-all hover:scale-[1.02] active:scale-95"

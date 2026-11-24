@@ -97,11 +97,12 @@ export const aboutMenu: NavLink[] = [
 
 // Options shown in the "Start Your Journey" guided flow.
 export const journeyOptions = [
-  { emoji: "🌍", label: "Work Abroad", href: "/contact?service=work-abroad" },
-  { emoji: "🎓", label: "Study Abroad", href: "/contact?service=study-abroad" },
-  { emoji: "✈️", label: "Travel", href: "/contact?service=travel-tourism" },
-  { emoji: "🛂", label: "Visa Assistance", href: "/contact?service=visa-assistance" },
+  { emoji: "🌍", label: "Work Abroad", href: "/jobs" },
+  { emoji: "🎓", label: "Study Abroad", href: "/study-abroad" },
+  { emoji: "✈️", label: "Travel & Ghana DMC", href: "/travel-tourism" },
+  { emoji: "🛂", label: "Visa Assistance", href: "/visa-assistance" },
   { emoji: "🧳", label: "Flight Booking", href: "/flight-booking" },
+  { emoji: "🤝", label: "B2B / Agency Partnership", href: "/partners" },
 ] as const;
 
 export const howItWorks = [
@@ -169,11 +170,12 @@ export const whatWeDontControl = [
 ];
 
 export const whatsappMenuOptions = [
-  { emoji: "🌍", label: "Work Abroad", message: "Hi, I'd like to know more about Work Abroad opportunities." },
-  { emoji: "🎓", label: "Study Abroad", message: "Hi, I'd like to know more about Study Abroad." },
-  { emoji: "🛂", label: "Visa Assistance", message: "Hi, I'd like help with Visa Assistance." },
-  { emoji: "✈️", label: "Flight Booking", message: "Hi, I'd like help booking a flight." },
-  { emoji: "🌴", label: "Travel & Tourism", message: "Hi, I'd like to plan a trip." },
+  { emoji: "🌍", label: "Work Abroad & Open Jobs", message: "Hi, I'd like to know more about Work Abroad opportunities." },
+  { emoji: "🎓", label: "Study Abroad Admissions", message: "Hi, I'd like to know more about Study Abroad." },
+  { emoji: "🤝", label: "B2B / Agency Partnership", message: "Hello KIA Partnership Management, we would like to discuss a B2B partnership (Workforce / University / DMC)." },
+  { emoji: "🛂", label: "Visa Assistance Desk", message: "Hi, I'd like help with Visa Assistance." },
+  { emoji: "✈️", label: "Flight Booking Quote", message: "Hi, I'd like help booking a flight." },
+  { emoji: "🌴", label: "Travel & Visit Ghana DMC", message: "Hi, I'd like to plan a trip." },
   { emoji: "💬", label: "Talk to an Advisor", message: "Hi, I'd like to speak with an advisor." },
 ];
 

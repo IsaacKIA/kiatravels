@@ -55,6 +55,24 @@ body {
   overflow-x: hidden;
 }
 
+/* Smooth infinite marquee for global mobility corridors */
+@keyframes kia-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: kia-marquee 38s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
 /* ============================================
    AURORA GLOW BACKGROUNDS — Boosted Visibility
    ============================================ */

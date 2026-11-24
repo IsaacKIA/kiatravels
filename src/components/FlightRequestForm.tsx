@@ -53,7 +53,7 @@ export default function FlightRequestForm() {
     return next;
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     if (values.website) {
@@ -69,8 +69,33 @@ export default function FlightRequestForm() {
     trackEvent("form_submit", { form: "flight_booking" });
     trackEvent("flight_enquiry", { departure: values.departure, destination: values.destination });
 
+    let refId = `KIA-${Date.now().toString(36).toUpperCase()}`;
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "flight-booking",
+          fullName: values.fullName,
+          whatsapp: values.whatsapp,
+          service: "flight-booking",
+          details: {
+            departure: values.departure,
+            destination: values.destination,
+            travelDate: values.travelDate,
+            returnDate: values.returnDate || "One-Way",
+            passengers: values.passengers,
+          },
+        }),
+      });
+      const data = (await res.json()) as { ok?: boolean; referenceId?: string };
+      if (data.referenceId) refId = data.referenceId;
+    } catch {
+      // Continue seamlessly
+    }
+
     const message = [
-      "Hi, I'd like assistance booking a flight.",
+      `Hi, I'd like assistance booking a flight [Ref: ${refId}].`,
       `Name: ${values.fullName}`,
       `From: ${values.departure}`,
       `To: ${values.destination}`,

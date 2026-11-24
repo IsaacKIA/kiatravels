@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { insightArticles } from "@/data/insights";
+import { jobs } from "@/data/jobs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://travels.kiastartupconsult.com";
@@ -10,6 +11,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(article.lastUpdated),
     changeFrequency: "weekly",
     priority: 0.85,
+  }));
+
+  const jobEntries: MetadataRoute.Sitemap = jobs.map((job) => ({
+    url: `${baseUrl}/jobs/${job.slug}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.9,
   }));
 
   return [
@@ -31,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.95,
     },
+    ...jobEntries,
     ...insightEntries,
     {
       url: `${baseUrl}/work-abroad`,

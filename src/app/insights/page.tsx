@@ -1,10 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, Clock, Calendar, ArrowRight, CheckCircle2, MessageCircle, Sparkles, ShieldCheck } from "lucide-react";
+import Image from "next/image";
+import { BookOpen, Clock, Calendar, ArrowRight, CheckCircle2, MessageCircle, ShieldCheck } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import TrackPageView from "@/components/TrackPageView";
 import { insightArticles } from "@/data/insights";
 import { siteConfig } from "@/data/site";
+
+const articleImages = [
+  "/images/Germany.png",
+  "/images/visa.png",
+  "/images/work abroad (2).png",
+  "/images/University area view.png",
+  "/images/Beautiful Dubai.png",
+  "/images/Visit Ghana.png",
+];
 
 export const metadata: Metadata = {
   title: "Travel & Career Insights | Visa Guides & Work Abroad Advice",
@@ -169,21 +179,31 @@ export default function InsightsPage() {
                     </div>
                   </div>
 
-                  {/* Visual sidebar banner */}
-                  <div className="relative flex flex-col justify-center bg-gradient-to-br from-ink via-slate-900 to-amber-950 p-8 text-white lg:col-span-4">
-                    <div className="space-y-4">
-                      <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm text-amber-400">
-                        <Sparkles className="h-6 w-6" />
-                      </div>
-                      <h3 className="text-xl font-bold">Ready to take the next step?</h3>
-                      <p className="text-xs text-slate-300 leading-relaxed">
-                        Don&apos;t navigate complex visa forms alone. Our team reviews your qualifications and matches you with verified European employers.
+                  {/* Visual Photo Sidebar Banner */}
+                  <div className="relative flex min-h-[280px] flex-col justify-end overflow-hidden bg-[#0f172a] p-8 text-white lg:col-span-4">
+                    <Image
+                      src={articleImages[0]}
+                      alt={featured.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-[#0b0f17]/75 to-[#0b0f17]/30" />
+                    <div className="relative z-10 space-y-3">
+                      <span className="inline-block rounded-full bg-amber-400 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-950">
+                        Direct Advisory Desk
+                      </span>
+                      <h3 className="font-display text-xl font-bold text-white">
+                        Ready to take the next step?
+                      </h3>
+                      <p className="text-xs leading-relaxed text-slate-200">
+                        Have our team review your qualifications and match you with verified European employers.
                       </p>
                       <a
                         href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(featured.whatsappMessage)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-500 py-3 text-xs font-bold text-ink shadow-lg transition-transform hover:scale-[1.02] active:scale-95"
+                        className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-amber-400 py-3 text-xs font-bold text-slate-950 shadow-lg transition-transform hover:scale-[1.02] hover:bg-amber-300"
                       >
                         <MessageCircle className="h-4 w-4" />
                         <span>Chat About Poland &amp; Lithuania</span>

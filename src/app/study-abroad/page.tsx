@@ -13,6 +13,7 @@ import {
 import PageHero from "@/components/PageHero";
 import TrackPageView from "@/components/TrackPageView";
 import DestinationCard from "@/components/DestinationCard";
+import StudyFundsCalculator from "@/components/StudyFundsCalculator";
 import { destinations } from "@/data/study-abroad";
 import { buildWhatsAppLink } from "@/data/site";
 
@@ -173,6 +174,9 @@ export default function StudyAbroadPage() {
           ))}
         </div>
       </section>
+
+      {/* Interactive 28-Day Proof-of-Funds Calculator */}
+      <StudyFundsCalculator />
 
       {/* Student Life Photographic Bento Mosaic */}
       <section className="border-t border-line bg-white py-16 sm:py-24">

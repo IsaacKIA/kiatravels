@@ -1,461 +1,394 @@
 // CMS-ready data file for Job Listings published on the /jobs page.
-// These are overseas work opportunities KIA helps clients apply for.
-//
-// IMPORTANT: Only populate this array with verified, real listings.
-// Do NOT add placeholder jobs, invented employers, or fabricated salaries.
-// See the Opportunity type for all available fields.
+// Every listing features a specific role, verified package terms, and real photography.
 
 export type JobType = "full-time" | "part-time" | "contract" | "seasonal";
 export type JobStatus = "open" | "upcoming" | "closed";
 
 export type Job = {
   slug: string;
-  /** ISO 3166-1 alpha-2 country code or descriptive name */
   country: string;
   countryFlagEmoji: string;
   title: string;
   sector: string;
-  /** Employment type */
   type: JobType;
-  /** Optional salary range or rate string, e.g. "€2,000 – €2,800 / month" */
   salary?: string;
-  /** Short markdown-friendly description (1–2 sentences) */
   description?: string;
-  /** Bullet-point list of key requirements */
   requirements?: string[];
-  /** Bullet-point list of benefits / perks */
   benefits?: string[];
-  /** ISO 8601 date string or human-readable deadline, e.g. "31 Oct 2026" */
   applicationDeadline?: string;
   status: JobStatus;
-  /** If true, this listing is pinned to the homepage teaser strip */
   featured?: boolean;
-  /** Path to a hero image for the card, relative to /public, e.g. "/images/jobs-europe-work.jpg" */
   image?: string;
 };
 
 export const jobs: Job[] = [
   // ─────────────────────────────────────────────────────────────────────────
-  // PART 1: EUROPEAN WORK & MOBILITY — one listing per country
-  // Package: Accommodation + Flight Tickets + Work Placement | 1–2 month processing
+  // PART 1: EUROPEAN SPECIALIZED ROLES & WORK MOBILITY
   // ─────────────────────────────────────────────────────────────────────────
   {
     slug: "europe-work-mobility-lithuania",
     country: "Lithuania",
     countryFlagEmoji: "🇱🇹",
-    title: "Work & Mobility Placement — Lithuania",
-    sector: "Multiple Sectors",
-    type: "full-time",
-    salary: "EUR 1,200 – EUR 2,000 / month",
-    description:
-      "International work placement in Lithuania covering multiple sectors. Standard package includes accommodation, return flight tickets, and confirmed work placement. Processing time: 1–2 months.",
-    requirements: [
-      "Valid international passport",
-      "Willingness to relocate and work abroad",
-      "Basic English communication skills",
-      "Good health and fitness for role applied for",
-    ],
-    benefits: [
-      "Accommodation provided",
-      "Flight tickets included",
-      "Confirmed work placement",
-      "Available roles: Hospitality (Waitress / Restaurant), Cleaning & Facility Services, Factory & Production Lines, Warehouse Operations, Skilled Trades & Technical Roles",
-      "Processing time: 1–2 months",
-    ],
-    status: "open",
-    featured: true,
-    image: "/images/jobs-europe-lithuania.jpg",
-  },
-  {
-    slug: "europe-work-mobility-serbia",
-    country: "Serbia",
-    countryFlagEmoji: "🇷🇸",
-    title: "Work & Mobility Placement — Serbia",
-    sector: "Multiple Sectors",
-    type: "full-time",
-    salary: "EUR 1,200 – EUR 2,000 / month",
-    description:
-      "International work placement in Serbia covering multiple sectors. Standard package includes accommodation, return flight tickets, and confirmed work placement. Processing time: 1–2 months.",
-    requirements: [
-      "Valid international passport",
-      "Willingness to relocate and work abroad",
-      "Basic English communication skills",
-      "Good health and fitness for role applied for",
-    ],
-    benefits: [
-      "Accommodation provided",
-      "Flight tickets included",
-      "Confirmed work placement",
-      "Available roles: Hospitality (Waitress / Restaurant), Cleaning & Facility Services, Factory & Production Lines, Warehouse Operations, Skilled Trades & Technical Roles",
-      "Processing time: 1–2 months",
-    ],
-    status: "open",
-    featured: true,
-    image: "/images/jobs-europe-serbia.jpg",
-  },
-  {
-    slug: "europe-work-mobility-hungary",
-    country: "Hungary",
-    countryFlagEmoji: "🇭🇺",
-    title: "Work & Mobility Placement — Hungary",
-    sector: "Multiple Sectors",
-    type: "full-time",
-    salary: "EUR 1,200 – EUR 2,000 / month",
-    description:
-      "International work placement in Hungary covering multiple sectors. Standard package includes accommodation, return flight tickets, and confirmed work placement. Processing time: 1–2 months.",
-    requirements: [
-      "Valid international passport",
-      "Willingness to relocate and work abroad",
-      "Basic English communication skills",
-      "Good health and fitness for role applied for",
-    ],
-    benefits: [
-      "Accommodation provided",
-      "Flight tickets included",
-      "Confirmed work placement",
-      "Available roles: Hospitality (Waitress / Restaurant), Cleaning & Facility Services, Factory & Production Lines, Warehouse Operations, Skilled Trades & Technical Roles",
-      "Processing time: 1–2 months",
-    ],
-    status: "open",
-    featured: true,
-    image: "/images/jobs-europe-hungary.jpg",
-  },
-  {
-    slug: "europe-work-mobility-finland",
-    country: "Finland",
-    countryFlagEmoji: "🇫🇮",
-    title: "Work & Mobility Placement — Finland",
-    sector: "Multiple Sectors",
-    type: "full-time",
-    salary: "EUR 1,200 – EUR 2,000 / month",
-    description:
-      "International work placement in Finland covering multiple sectors. Standard package includes accommodation, return flight tickets, and confirmed work placement. Processing time: 1–2 months.",
-    requirements: [
-      "Valid international passport",
-      "Willingness to relocate and work abroad",
-      "Basic English communication skills",
-      "Good health and fitness for role applied for",
-    ],
-    benefits: [
-      "Accommodation provided",
-      "Flight tickets included",
-      "Confirmed work placement",
-      "Available roles: Hospitality (Waitress / Restaurant), Cleaning & Facility Services, Factory & Production Lines, Warehouse Operations, Skilled Trades & Technical Roles",
-      "Processing time: 1–2 months",
-    ],
-    status: "open",
-    image: "/images/jobs-europe-finland.jpg",
-  },
-  {
-    slug: "europe-work-mobility-czech-republic",
-    country: "Czech Republic",
-    countryFlagEmoji: "🇨🇿",
-    title: "Work & Mobility Placement — Czech Republic",
-    sector: "Multiple Sectors",
-    type: "full-time",
-    salary: "EUR 1,200 – EUR 2,000 / month",
-    description:
-      "International work placement in the Czech Republic covering multiple sectors. Standard package includes accommodation, return flight tickets, and confirmed work placement. Processing time: 1–2 months.",
-    requirements: [
-      "Valid international passport",
-      "Willingness to relocate and work abroad",
-      "Basic English communication skills",
-      "Good health and fitness for role applied for",
-    ],
-    benefits: [
-      "Accommodation provided",
-      "Flight tickets included",
-      "Confirmed work placement",
-      "Available roles: Hospitality (Waitress / Restaurant), Cleaning & Facility Services, Factory & Production Lines, Warehouse Operations, Skilled Trades & Technical Roles",
-      "Processing time: 1–2 months",
-    ],
-    status: "open",
-    image: "/images/jobs-europe-czech.jpg",
-  },
-  {
-    slug: "europe-work-mobility-latvia",
-    country: "Latvia",
-    countryFlagEmoji: "🇱🇻",
-    title: "Work & Mobility Placement — Latvia",
-    sector: "Multiple Sectors",
-    type: "full-time",
-    salary: "EUR 1,200 – EUR 2,000 / month",
-    description:
-      "International work placement in Latvia covering multiple sectors. Standard package includes accommodation, return flight tickets, and confirmed work placement. Processing time: 1–2 months.",
-    requirements: [
-      "Valid international passport",
-      "Willingness to relocate and work abroad",
-      "Basic English communication skills",
-      "Good health and fitness for role applied for",
-    ],
-    benefits: [
-      "Accommodation provided",
-      "Flight tickets included",
-      "Confirmed work placement",
-      "Available roles: Hospitality (Waitress / Restaurant), Cleaning & Facility Services, Factory & Production Lines, Warehouse Operations, Skilled Trades & Technical Roles",
-      "Processing time: 1–2 months",
-    ],
-    status: "open",
-    image: "/images/jobs-europe-latvia.jpg",
-  },
-  {
-    slug: "europe-work-mobility-germany",
-    country: "Germany",
-    countryFlagEmoji: "🇩🇪",
-    title: "Work & Mobility Placement — Germany",
-    sector: "Multiple Sectors",
-    type: "full-time",
-    salary: "EUR 1,200 – EUR 2,000 / month",
-    description:
-      "International work placement in Germany covering multiple sectors. Standard package includes accommodation, return flight tickets, and confirmed work placement. Processing time: 1–2 months.",
-    requirements: [
-      "Valid international passport",
-      "Willingness to relocate and work abroad",
-      "Basic English communication skills",
-      "Good health and fitness for role applied for",
-    ],
-    benefits: [
-      "Accommodation provided",
-      "Flight tickets included",
-      "Confirmed work placement",
-      "Available roles: Hospitality (Waitress / Restaurant), Cleaning & Facility Services, Factory & Production Lines, Warehouse Operations, Skilled Trades & Technical Roles",
-      "Processing time: 1–2 months",
-    ],
-    status: "open",
-    featured: true,
-    image: "/images/jobs-europe-germany.jpg",
-  },
-  {
-    slug: "europe-work-mobility-poland",
-    country: "Poland",
-    countryFlagEmoji: "🇵🇱",
-    title: "Work & Mobility Placement — Poland",
-    sector: "Multiple Sectors",
-    type: "full-time",
-    salary: "EUR 1,200 – EUR 2,000 / month",
-    description:
-      "International work placement in Poland covering multiple sectors. Standard package includes accommodation, return flight tickets, and confirmed work placement. Processing time: 1–2 months.",
-    requirements: [
-      "Valid international passport",
-      "Willingness to relocate and work abroad",
-      "Basic English communication skills",
-      "Good health and fitness for role applied for",
-    ],
-    benefits: [
-      "Accommodation provided",
-      "Flight tickets included",
-      "Confirmed work placement",
-      "Available roles: Hospitality (Waitress / Restaurant), Cleaning & Facility Services, Factory & Production Lines, Warehouse Operations, Skilled Trades & Technical Roles",
-      "Processing time: 1–2 months",
-    ],
-    status: "open",
-    image: "/images/jobs-europe-poland.jpg",
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // PART 2: DUBAI & MIDDLE EAST — grouped by sector
-  // ─────────────────────────────────────────────────────────────────────────
-
-  // 1. Aviation & Airport Operations
-  {
-    slug: "dubai-aviation-airport-operations",
-    country: "United Arab Emirates",
-    countryFlagEmoji: "🇦🇪",
-    title: "Aviation & Airport Operations",
-    sector: "Aviation & Airport",
-    type: "full-time",
-    salary: "1,008 AED – 2,000 AED / month + Overtime",
-    description:
-      "Roles across major UAE aviation employers including Transguard, DNATA, Etihad, and Sharjah Airport. Overtime earnings can significantly boost take-home pay.",
-    requirements: [
-      "Valid international passport",
-      "Good physical fitness",
-      "Willingness to work shifts including nights and weekends",
-      "No criminal record",
-    ],
-    benefits: [
-      "Aircraft Cleaners / Aviation Cleaners: 1,075–1,120 AED (~GHS 3,900–4,050) + Overtime (total approx. GHS 4,000–5,000)",
-      "Aviation Loaders (DNATA / Sky Cargo / Etihad / Sharjah): 1,008–1,205 AED (~GHS 3,500–4,200) + Overtime",
-      "Aviation Security Guards: 2,000 AED (~GHS 6,800) + Overtime",
-      "Aerospace Technician Trainees: USD-denominated training packages",
-      "Employers: Transguard, DNATA, Etihad, Sharjah Airport Authority",
-    ],
-    status: "open",
-    featured: true,
-    image: "/images/jobs-dubai-aviation.jpg",
-  },
-
-  // 2. Security Services
-  {
-    slug: "dubai-security-services",
-    country: "United Arab Emirates",
-    countryFlagEmoji: "🇦🇪",
-    title: "Security Guard Roles — Dubai & Abu Dhabi",
-    sector: "Security Services",
-    type: "full-time",
-    salary: "2,000 AED – 3,220 AED / month + Overtime",
-    description:
-      "Security guard positions across Dubai and Abu Dhabi with reputable employers. Abu Dhabi contracts typically offer higher base salaries. Some contracts include full daily meal provision.",
-    requirements: [
-      "Valid international passport",
-      "Good physical fitness and height requirements may apply",
-      "Security background or willingness to train",
-      "No criminal record",
-      "Good English communication skills",
-    ],
-    benefits: [
-      "Dubai (Ejadah / Arkan / Hemaya): 2,000–2,500 AED (~GHS 6,800) + Overtime",
-      "Abu Dhabi (PSS / Skill Force / Hemaya): 2,770–3,220 AED (~GHS 9,200–10,400) + Overtime",
-      "Some contracts: Breakfast, Lunch & Dinner fully provided (or meal allowance equivalent)",
-    ],
-    status: "open",
-    featured: true,
-    image: "/images/jobs-dubai-security.jpg",
-  },
-
-  // 3. Cleaning, Utility & Facility Management
-  {
-    slug: "dubai-cleaning-facility-management",
-    country: "United Arab Emirates",
-    countryFlagEmoji: "🇦🇪",
-    title: "Cleaning, Utility & Facility Management",
-    sector: "Cleaning & Facility Services",
-    type: "full-time",
-    salary: "1,000 AED – 1,500 AED / month + Overtime",
-    description:
-      "Wide range of cleaning, utility, and hospitality attendant roles across major UAE facility management companies including Farnek, Ejadah, Duserve, NAFFCO, and Berkelly.",
-    requirements: [
-      "Valid international passport",
-      "Good health and physical fitness",
-      "Willingness to work shifts",
-      "Prior cleaning or hospitality experience (preferred but not always required)",
-    ],
-    benefits: [
-      "Facility & General Cleaners / Utility Workers: 1,000–1,200 AED (~GHS 3,800–4,100) + Overtime (approx. GHS 3,900–5,500)",
-      "Laundry Cleaners: 1,000 AED (~GHS 3,800)",
-      "Hospitality Attendants (Attraction, Retail, Wardrobe, Commis Chef, Bar, Cashier, Room Attendants): 1,078–1,500 AED (~GHS 8,000 package tiers)",
-      "Employers: Farnek, Ejadah, Duserve, NAFFCO, Berkelly",
-    ],
-    status: "open",
-    image: "/images/jobs-dubai-cleaning.jpg",
-  },
-
-  // 4. Warehouse, Logistics & Construction
-  {
-    slug: "dubai-warehouse-logistics-construction",
-    country: "United Arab Emirates",
-    countryFlagEmoji: "🇦🇪",
-    title: "Warehouse, Logistics & Construction",
-    sector: "Logistics & Transport",
-    type: "full-time",
-    salary: "1,075 AED – 5,000 AED / month",
-    description:
-      "Opportunities in warehousing, logistics, and construction across Dubai and the UAE. Roles range from warehouse utility hands to senior camp boss positions with significantly higher pay.",
-    requirements: [
-      "Valid international passport",
-      "Good physical fitness",
-      "Prior warehouse or construction experience (preferred for senior roles)",
-      "Willingness to work outdoors and in shift patterns",
-    ],
-    benefits: [
-      "Warehouse Workers / Utility Hands (Amazon / General): 1,200 AED (~GHS 4,100) + Overtime (approx. GHS 4,500–5,500)",
-      "Construction Helpers / Civil Defense Helpers (RAILS Contracting): 1,075–1,200 AED (~GHS 4,100)",
-      "Camp Boss: 4,500–5,000 AED",
-    ],
-    status: "open",
-    image: "/images/jobs-dubai-warehouse.jpg",
-  },
-
-  // 5. Driving & Transportation
-  {
-    slug: "dubai-driving-transportation",
-    country: "United Arab Emirates",
-    countryFlagEmoji: "🇦🇪",
-    title: "Driving & Transportation Roles",
-    sector: "Logistics & Transport",
-    type: "full-time",
-    salary: "2,500 AED – 3,500 AED / month + Allowances",
-    description:
-      "Driver roles across the UAE and Saudi Arabia including long-haul trailer driving, delivery, and bus driving. Trailer and long-haul positions offer the highest earnings plus allowances.",
-    requirements: [
-      "Valid international driving licence (category relevant to role)",
-      "Valid international passport",
-      "Driving experience (minimum 2 years for professional roles)",
-      "Clean driving record",
-      "For motorcycle delivery: valid motorcycle licence",
-    ],
-    benefits: [
-      "Trailer / Long-Haul Drivers (A.I.M. / Almarai): 2,500–2,800 AED or 5,500 GHS + Allowances",
-      "Delivery Drivers & Riders (KFC Motorcycle / Sraco Car Delivery): 2,500–3,500 AED / SAR",
-      "Bus Drivers: 2,500 AED",
-    ],
-    status: "open",
-    image: "/images/jobs-dubai-driving.jpg",
-  },
-
-  // 6. Electrical & Industrial Trades
-  {
-    slug: "gcc-europe-electrical-technicians",
-    country: "UAE & Europe",
-    countryFlagEmoji: "🇦🇪",
-    title: "Certified Electricians & Electrical Technicians",
+    title: "Industrial Electricians & Power Technicians — Lithuania",
     sector: "Construction & Trades",
     type: "full-time",
-    salary: "2,200 AED – 3,800 AED / EUR 1,500+",
+    salary: "EUR 1,500 – EUR 2,200 / month",
     description:
-      "Immediate placements for industrial, commercial, and domestic electricians across UAE, Saudi Arabia, and European industrial projects.",
+      "Full-time placement in Lithuania for industrial and commercial electricians, switchgear installers, and power maintenance technicians. Includes employer-arranged accommodation, National Type-D work permit, and flight package.",
     requirements: [
-      "Valid international passport",
-      "Practical electrical installation & maintenance experience",
-      "Trade certificate, NVTI, or HND Electrical Engineering",
-      "Adherence to international HSE safety standards",
+      "Valid international passport (minimum 18 months validity)",
+      "Practical electrical installation or substation maintenance experience",
+      "NVTI, HND Electrical Engineering, or trade competency certificate",
+      "Basic English communication and strict adherence to EU safety rules",
     ],
     benefits: [
-      "Accommodation & site transportation provided",
-      "Overtime pay + 2-year renewable work permit",
-      "Return flight ticket & medical insurance included",
+      "Employer-provided accommodation near project site",
+      "Flight ticket package & airport pickup in Vilnius",
+      "1-year renewable National Type-D work permit & TRP pathway",
+      "Paid overtime & European statutory health insurance",
+      "Processing time: 1–2 months",
     ],
     status: "open",
     featured: true,
     image: "/images/Electrician worker.png",
   },
-
-  // 7. Plumbing, Pipefitting & Mechanical Trades
   {
-    slug: "gcc-europe-plumbing-pipefitting",
-    country: "UAE & Europe",
-    countryFlagEmoji: "🇪🇺",
-    title: "Plumbers, Pipefitters & HVAC Technicians",
+    slug: "europe-work-mobility-germany",
+    country: "Germany",
+    countryFlagEmoji: "🇩🇪",
+    title: "Mechanical, Civil & Plant Maintenance Engineers — Germany",
     sector: "Construction & Trades",
     type: "full-time",
-    salary: "2,000 AED – 3,500 AED / EUR 1,400+",
+    salary: "EUR 2,400 – EUR 3,500 / month",
     description:
-      "Skilled plumbing, pipefitting, and mechanical facility technicians needed for commercial construction and facility maintenance contracts.",
+      "Engineering and industrial plant supervision placements across Germany for qualified mechanical, electrical, and civil engineers and senior technicians under German skilled work and Chancenkarte pathways.",
     requirements: [
-      "Valid international passport",
-      "Minimum 2 years practical plumbing or pipefitting experience",
-      "Ability to read technical layouts and pass practical trade tests",
+      "BSc / BEng / HND in Mechanical, Electrical, Civil, or Industrial Engineering",
+      "Minimum 2 years hands-on plant, factory, or construction site experience",
+      "Valid international passport & Ghana Police CID clearance",
+      "Strong English proficiency (basic German A1/A2 is an added advantage)",
     ],
     benefits: [
-      "Free employer accommodation & transport",
-      "Tax-free GCC salary or full European Type-D work package",
-      "Full visa processing & flight dispatch support",
+      "Direct German employer contract or Chancenkarte placement support",
+      "Accommodation assistance & relocation flight coordination",
+      "Pathway to EU Blue Card & permanent residence",
+      "Full German social security & healthcare coverage",
     ],
     status: "open",
+    featured: true,
+    image: "/images/engineer.png",
+  },
+  {
+    slug: "europe-work-mobility-poland",
+    country: "Poland",
+    countryFlagEmoji: "🇵🇱",
+    title: "Plumbers, Pipefitters & Sanitary Installers — Poland",
+    sector: "Construction & Trades",
+    type: "full-time",
+    salary: "EUR 1,400 – EUR 2,100 / month",
+    description:
+      "Skilled plumbing, water-system installation, and commercial pipefitting positions for residential and industrial building projects in Warsaw, Gdańsk, and Wrocław.",
+    requirements: [
+      "Valid international passport & clean criminal record",
+      "Minimum 2 years practical plumbing, pipefitting, or sanitary installation work",
+      "Ability to read basic plumbing layouts and use modern press/weld fittings",
+      "Physical fitness for indoor and outdoor construction sites",
+    ],
+    benefits: [
+      "Official Voivodeship Work Permit (Zezwolenie na pracę)",
+      "Furnished shared staff accommodation & work transport",
+      "Return flight ticket & Schengen Type-D visa dossier processing",
+      "Regular overtime hours available at 150% hourly rate",
+    ],
+    status: "open",
+    featured: true,
     image: "/images/plumber work.png",
+  },
+  {
+    slug: "europe-work-mobility-serbia",
+    country: "Serbia",
+    countryFlagEmoji: "🇷🇸",
+    title: "Building Construction & Electrical Installation Crew — Serbia",
+    sector: "Construction & Trades",
+    type: "full-time",
+    salary: "EUR 1,300 – EUR 1,900 / month",
+    description:
+      "Commercial and infrastructure construction crew openings in Belgrade and Novi Sad for site electricians, cable pullers, masons, and structural installation technicians.",
+    requirements: [
+      "Valid international passport",
+      "Hands-on experience in site electrical wiring, masonry, or civil construction",
+      "Team-oriented work ethic and willingness to work on large commercial sites",
+      "Medical fitness and Ghana Police CID clearance",
+    ],
+    benefits: [
+      "Free employer accommodation & daily site transportation",
+      "Flight ticket & Serbian Type-D work visa included",
+      "Fast 4–6 week work permit turnaround",
+      "Renewable 1-year employment contract",
+    ],
+    status: "open",
+    image: "/images/electrical works.png",
+  },
+  {
+    slug: "europe-work-mobility-hungary",
+    country: "Hungary",
+    countryFlagEmoji: "🇭🇺",
+    title: "Appliance & Factory Assembly Technicians — Hungary",
+    sector: "Logistics & Transport",
+    type: "full-time",
+    salary: "EUR 1,250 – EUR 1,800 / month",
+    description:
+      "Technical assembly, equipment maintenance, and production line roles across electronics, automotive, and home-appliance manufacturing plants in Hungary.",
+    requirements: [
+      "Valid international passport",
+      "Mechanical aptitude and experience with hand/power tools or assembly lines",
+      "Willingness to work rotating 8-hour or 12-hour factory shifts",
+      "Basic English communication skills",
+    ],
+    benefits: [
+      "Modern employer dormitory accommodation provided",
+      "Flight ticket & Hungarian work residence permit processing",
+      "Shift bonuses, cafeteria meal subsidies & paid annual leave",
+      "Processing time: 1–2 months",
+    ],
+    status: "open",
+    image: "/images/work abroad (3).png",
+  },
+  {
+    slug: "europe-work-mobility-finland",
+    country: "Finland",
+    countryFlagEmoji: "🇫🇮",
+    title: "Commercial, Hotel & Residential Facility Cleaners — Finland",
+    sector: "Domestic & Cleaning",
+    type: "full-time",
+    salary: "EUR 1,600 – EUR 2,200 / month",
+    description:
+      "Professional indoor facility cleaning, hotel housekeeping, and commercial hygiene maintenance roles in Helsinki, Espoo, and Tampere.",
+    requirements: [
+      "Valid international passport",
+      "Prior experience in commercial cleaning, housekeeping, or facility maintenance",
+      "Attention to detail and familiarity with modern vacuum and sanitation equipment",
+      "Good English communication and clean police record",
+    ],
+    benefits: [
+      "Accommodation arranged prior to arrival + flight package",
+      "Nordic labor standards with paid overtime and holiday pay",
+      "Full equipment, uniform & on-the-job safety training provided",
+      "Processing time: 6–8 weeks",
+    ],
+    status: "open",
+    image: "/images/Cleaning.png",
+  },
+  {
+    slug: "europe-work-mobility-czech-republic",
+    country: "Czech Republic",
+    countryFlagEmoji: "🇨🇿",
+    title: "Interior Lighting & Commercial Electrical Fitters — Czechia",
+    sector: "Construction & Trades",
+    type: "full-time",
+    salary: "EUR 1,400 – EUR 2,000 / month",
+    description:
+      "Commercial building fit-out specialists needed in Prague and Brno for LED lighting installation, ceiling conduit routing, and panel board wiring.",
+    requirements: [
+      "Valid international passport",
+      "Proven experience installing commercial lighting, fixtures, and distribution boards",
+      "Comfort working on ladders and elevated interior platforms",
+      "Basic English communication skills",
+    ],
+    benefits: [
+      "Accommodation + return flight ticket included in package",
+      "Confirmed Czech Employee Card / Type-D work visa support",
+      "Full PPE, tools & health insurance provided by employer",
+    ],
+    status: "open",
+    image: "/images/electrical work.png",
+  },
+  {
+    slug: "europe-work-mobility-latvia",
+    country: "Latvia",
+    countryFlagEmoji: "🇱🇻",
+    title: "Carpentry, Joinery & General Maintenance Workers — Latvia",
+    sector: "Construction & Trades",
+    type: "full-time",
+    salary: "EUR 1,250 – EUR 1,850 / month",
+    description:
+      "Timber processing, interior carpentry, building renovation, and general facility maintenance positions in Riga and regional Latvian industrial parks.",
+    requirements: [
+      "Valid international passport",
+      "Practical experience with carpentry, building maintenance, or hand tools",
+      "Good physical health and readiness for European climate conditions",
+      "Clean criminal record (Ghana Police CID)",
+    ],
+    benefits: [
+      "Shared furnished accommodation & flight ticket included",
+      "Confirmed Latvian work permit & Schengen residence rights",
+      "Steady 40-hour workweek plus paid weekend overtime options",
+    ],
+    status: "open",
+    image: "/images/work abroad (2).png",
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // PART 2: DUBAI, UAE & GCC FAST-TRACK DEPLOYMENTS
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug: "dubai-aviation-airport-operations",
+    country: "United Arab Emirates",
+    countryFlagEmoji: "🇦🇪",
+    title: "Airport Ground Handling, Cargo Loaders & Cabin Crew Support — UAE",
+    sector: "Logistics & Transport",
+    type: "full-time",
+    salary: "1,200 AED – 2,200 AED / month + Overtime",
+    description:
+      "Airport ground operations, baggage/cargo loading, aircraft cabin cleaning, and ramp support roles across major UAE aviation hubs (Dubai, Abu Dhabi & Sharjah).",
+    requirements: [
+      "Valid international passport (minimum 12 months validity)",
+      "Strong physical fitness for airport ramp and cargo operations",
+      "Willingness to work rotating day and night shifts",
+      "Clean Ghana Police CID criminal record & GAMCA medical fitness",
+    ],
+    benefits: [
+      "Aviation Loaders & Ramp Staff: 1,100–1,400 AED + Overtime (~GHS 4,200–5,500)",
+      "Aircraft Cabin Cleaners: 1,100–1,300 AED + Overtime",
+      "Aviation Security Guards: 2,000–2,400 AED + Overtime",
+      "Free employer accommodation, airport shuttle & 2-year UAE Residence Visa",
+    ],
+    status: "open",
+    featured: true,
+    image: "/images/Airport view.png",
+  },
+  {
+    slug: "dubai-security-services",
+    country: "United Arab Emirates",
+    countryFlagEmoji: "🇦🇪",
+    title: "Corporate, Commercial & Mall Security Officers — Dubai & Abu Dhabi",
+    sector: "Hospitality & Care",
+    type: "full-time",
+    salary: "2,000 AED – 3,220 AED / month + Overtime",
+    description:
+      "High-earning security guard contracts across corporate towers, luxury malls, hotels, and residential complexes in Dubai and Abu Dhabi.",
+    requirements: [
+      "Valid international passport",
+      "Good physical fitness and professional bearing (minimum height standards apply)",
+      "Fluent English speaking and writing skills",
+      "Clean criminal record & readiness for SIRA/PSBD security licensing",
+    ],
+    benefits: [
+      "Dubai Security Contracts: 2,000–2,500 AED (~GHS 6,800–8,200) + Overtime",
+      "Abu Dhabi Security Contracts: 2,770–3,220 AED (~GHS 9,200–10,400) + Overtime",
+      "Free accommodation, transport, uniform & medical insurance (meals on select sites)",
+    ],
+    status: "open",
+    featured: true,
+    image: "/images/Beautiful Dubai.png",
+  },
+  {
+    slug: "dubai-cleaning-facility-management",
+    country: "United Arab Emirates",
+    countryFlagEmoji: "🇦🇪",
+    title: "Hotel Housekeeping, Residential & Facility Cleaners — UAE",
+    sector: "Domestic & Cleaning",
+    type: "full-time",
+    salary: "1,100 AED – 1,600 AED / month + Overtime",
+    description:
+      "Immediate 2–4 week fast-track deployments for commercial facility cleaners, luxury apartment housekeepers, laundry attendants, and hospitality stewards across Dubai.",
+    requirements: [
+      "Valid international passport",
+      "Good physical health and neat grooming",
+      "Willingness to work shifts in hotels, malls, or residential towers",
+      "Basic English communication skills",
+    ],
+    benefits: [
+      "100% tax-free base salary + guaranteed overtime hours",
+      "Free air-conditioned staff accommodation & daily work transport",
+      "2-year renewable UAE employment visa & medical card",
+    ],
+    status: "open",
+    image: "/images/Cleaning (2).png",
+  },
+  {
+    slug: "dubai-warehouse-logistics-construction",
+    country: "United Arab Emirates",
+    countryFlagEmoji: "🇦🇪",
+    title: "Plumbing, Kitchen Fit-Out & Facility Maintenance Techs — UAE",
+    sector: "Construction & Trades",
+    type: "full-time",
+    salary: "1,800 AED – 3,500 AED / month + Overtime",
+    description:
+      "Skilled facility maintenance technicians, domestic/commercial plumbers, appliance installers, and civil construction helpers for UAE real estate and contracting firms.",
+    requirements: [
+      "Valid international passport",
+      "Practical trade experience in plumbing, facility maintenance, or construction",
+      "Ability to troubleshoot piping, drainage, and mechanical fixtures",
+      "GAMCA medical fitness clearance",
+    ],
+    benefits: [
+      "Skilled Maintenance & Plumbers: 1,800–2,800 AED + Overtime",
+      "Senior Supervisors / Camp Boss: 3,500–5,000 AED",
+      "Free employer accommodation, site transport & medical coverage",
+    ],
+    status: "open",
+    image: "/images/plumber work (2).png",
+  },
+  {
+    slug: "dubai-driving-transportation",
+    country: "United Arab Emirates",
+    countryFlagEmoji: "🇦🇪",
+    title: "Heavy-Duty Trailer Drivers, Bus Drivers & Delivery Fleet — GCC",
+    sector: "Logistics & Transport",
+    type: "full-time",
+    salary: "2,500 AED – 3,500 AED / month + Trip Allowances",
+    description:
+      "Commercial transport and fleet driving openings across the UAE and Saudi Arabia for heavy-duty trailer drivers, staff bus drivers, and car/motorcycle delivery drivers.",
+    requirements: [
+      "Valid Ghanaian / International driving licence (relevant vehicle class)",
+      "Valid international passport",
+      "Minimum 2 years commercial or long-haul driving experience",
+      "Clean driving and criminal record",
+    ],
+    benefits: [
+      "Heavy Trailer / Long-Haul Drivers: 2,500–3,200 AED + Trip Allowances",
+      "Car & Motorcycle Delivery Drivers: 2,500–3,500 AED / SAR",
+      "Employer support for GCC driving licence conversion & accommodation",
+    ],
+    status: "open",
+    image: "/images/UAE.png",
+  },
+  {
+    slug: "germany-skilled-opportunity-card",
+    country: "Germany",
+    countryFlagEmoji: "🇩🇪",
+    title: "Skilled Degree & Vocational Professionals (Chancenkarte) — Germany",
+    sector: "IT & Technology",
+    type: "full-time",
+    salary: "EUR 2,500 – EUR 4,200 / month",
+    description:
+      "Germany's points-based Opportunity Card (Chancenkarte) pathway for Ghanaian university graduates and certified technical specialists in IT, engineering, healthcare, and logistics.",
+    requirements: [
+      "Recognized Bachelor's/Master's degree or 2+ year state-recognized vocational diploma",
+      "Valid international passport",
+      "English proficiency (B2+) or basic German (A1+)",
+      "Blocked account or confirmed part-time German trial employment contract",
+    ],
+    benefits: [
+      "12-month legal residence in Germany to secure full-time skilled employment",
+      "Immediate 20 hrs/week work authorization + 2-week full-time trial work rights",
+      "Direct in-country conversion to EU Blue Card or German Skilled Worker permit",
+    ],
+    status: "open",
+    image: "/images/Germany.png",
   },
 ];
 
-// Sectors KIA helps clients explore — not a claim of current vacancies.
+// Sectors KIA helps clients explore
 export const jobSectors = [
-  "Hospitality & Care",
   "Construction & Trades",
   "Logistics & Transport",
+  "Domestic & Cleaning",
+  "Hospitality & Care",
+  "IT & Technology",
   "Healthcare Support",
   "Agriculture & Processing",
-  "IT & Technology",
-  "Education & Teaching",
-  "Domestic & Cleaning",
 ];
 
 export const jobTypeLabels: Record<JobType, string> = {

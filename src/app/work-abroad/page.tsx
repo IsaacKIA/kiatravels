@@ -14,6 +14,8 @@ import {
 import PageHero from "@/components/PageHero";
 import TrackPageView from "@/components/TrackPageView";
 import JobCard from "@/components/JobCard";
+import WorkSalaryCalculator from "@/components/WorkSalaryCalculator";
+import TalentRegistrySection from "@/components/TalentRegistrySection";
 import { jobs, jobSectors } from "@/data/jobs";
 import { buildWhatsAppLink } from "@/data/site";
 
@@ -262,6 +264,9 @@ export default function WorkAbroadPage() {
         </div>
       </section>
 
+      {/* Interactive Overseas Work Salary & GHS Estimator */}
+      <WorkSalaryCalculator />
+
       {/* 4-Step Deployment Strip */}
       <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-24">
         <div className="text-center">
@@ -298,6 +303,9 @@ export default function WorkAbroadPage() {
           })}
         </div>
       </section>
+
+      {/* Global Talent & Trade Registry */}
+      <TalentRegistrySection />
 
       {/* B2B Manpower Supply Banner */}
       <section className="bg-[#0b0f17] py-16 text-white sm:py-20">

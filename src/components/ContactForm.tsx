@@ -45,6 +45,7 @@ export default function ContactForm() {
   const [website, setWebsite] = useState(""); // honeypot
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [referenceId, setReferenceId] = useState<string | null>(null);
   const [waLink, setWaLink] = useState<string | null>(null);
   const [mailtoLink, setMailtoLink] = useState<string | null>(null);
   const [startedTracking, setStartedTracking] = useState(false);
@@ -72,7 +73,7 @@ export default function ContactForm() {
     }
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
     if (website) return; // honeypot tripped
@@ -93,10 +94,37 @@ export default function ContactForm() {
     setStatus("submitting");
     trackEvent("form_submit", { form: "contact", service, channel: deliveryChannel });
 
+    // Record lead server-side first so zero B2B or desktop leads are lost
+    let refId = `KIA-${Date.now().toString(36).toUpperCase()}`;
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type:
+            service === "b2b-partnership"
+              ? "b2b-partnership"
+              : matchedJob
+                ? "job-application"
+                : "contact",
+          fullName,
+          whatsapp,
+          email: extra.email,
+          service,
+          details: extra,
+        }),
+      });
+      const data = (await res.json()) as { ok?: boolean; referenceId?: string };
+      if (data.referenceId) refId = data.referenceId;
+    } catch {
+      // Continue seamlessly even if offline
+    }
+    setReferenceId(refId);
+
     const serviceLabel =
       serviceOptions.find((s) => s.value === service)?.label ?? "General Enquiry";
     const lines = [
-      `Hi KIA-Start Up Consult, I have an enquiry — ${serviceLabel}.`,
+      `Hi KIA-Start Up Consult, I have an enquiry — ${serviceLabel} [Ref: ${refId}].`,
       `Name: ${fullName}`,
       `Phone / WhatsApp: ${whatsapp}`,
       ...fields
@@ -109,8 +137,8 @@ export default function ContactForm() {
     )}`;
     const emailSubject =
       service === "b2b-partnership"
-        ? `B2B Partnership Enquiry: ${extra.companyName || fullName} — KIA-Start Up Consult`
-        : `${serviceLabel} — ${fullName}`;
+        ? `[${refId}] B2B Partnership Enquiry: ${extra.companyName || fullName} — KIA-Start Up Consult`
+        : `[${refId}] ${serviceLabel} — ${fullName}`;
     const generatedMailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
       emailSubject
     )}&body=${encodeURIComponent(message)}`;
@@ -131,11 +159,19 @@ export default function ContactForm() {
     return (
       <div className="flex flex-col items-center rounded-2xl border border-line bg-white px-6 py-14 text-center shadow-sm">
         <CheckCircle2 className="h-10 w-10 text-emerald-600" aria-hidden />
-        <h3 className="mt-4 font-display text-xl font-bold text-ink">Enquiry Ready to Send</h3>
+        {referenceId && (
+          <span className="mt-3 rounded-full bg-amber-100 px-3 py-1 font-mono text-xs font-bold text-amber-900">
+            Reference ID: {referenceId}
+          </span>
+        )}
+        <h3 className="mt-3 font-display text-xl font-bold text-ink">
+          Enquiry Logged &amp; Ready to Send
+        </h3>
         <p className="mt-2 max-w-md text-sm leading-relaxed text-charcoal-soft">
+          Your enquiry has been logged on our server.{" "}
           {deliveryChannel === "email"
-            ? "We've opened your email client with your details pre-filled. You can also send it instantly via WhatsApp below."
-            : "We've opened WhatsApp with your details pre-filled — just hit send. Prefer email? Use the direct email button below."}
+            ? "We've also opened your email client with your details pre-filled, or you can send it instantly via WhatsApp below."
+            : "We've opened WhatsApp with your details pre-filled — just hit send, or use the official email button below."}
         </p>
 
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">

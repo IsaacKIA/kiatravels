@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero";
+import CorridorMarquee from "@/components/home/CorridorMarquee";
 import TrustStrip from "@/components/home/TrustStrip";
 import NextMove from "@/components/home/NextMove";
 import FeaturedJobs from "@/components/home/FeaturedJobs";
@@ -14,6 +15,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <CorridorMarquee />
       <TrustStrip />
       <NextMove />
       <FeaturedJobs />

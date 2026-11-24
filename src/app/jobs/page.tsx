@@ -5,6 +5,7 @@ import { AlertTriangle, Building2, ArrowRight } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import TrackPageView from "@/components/TrackPageView";
 import JobsExplorer from "@/components/JobsExplorer";
+import TalentRegistrySection from "@/components/TalentRegistrySection";
 import { jobs } from "@/data/jobs";
 import { siteConfig, buildWhatsAppLink } from "@/data/site";
 
@@ -115,6 +116,9 @@ export default function JobsPage() {
       >
         <JobsExplorer />
       </Suspense>
+
+      {/* Global Talent & Trade Registry Intake */}
+      <TalentRegistrySection />
 
       {/* B2B Partner Strip */}
       <section className="border-y border-slate-800 bg-[#0f172a] text-white">

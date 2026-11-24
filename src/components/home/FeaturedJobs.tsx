@@ -49,7 +49,7 @@ export default function FeaturedJobs() {
           {displayJobs.map((job) => (
             <Link
               key={job.slug}
-              href={`/contact?job=${job.slug}`}
+              href={`/jobs/${job.slug}`}
               className="glass-card-hover group flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all hover:border-amber-400 hover:shadow-md"
             >
               {job.image ? (
