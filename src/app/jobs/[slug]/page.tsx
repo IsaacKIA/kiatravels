@@ -191,13 +191,36 @@ export default async function JobDetailPage({ params }: Props) {
                   <span className="inline-flex items-center gap-1.5 font-bold">
                     <Clock className="h-3.5 w-3.5 text-amber-400" />
                     {jobTypeLabels[job.type]}
+                    {job.openings ? ` • ${job.openings} openings` : ""}
                   </span>
                   <span className="inline-flex items-center gap-1.5 font-bold text-amber-300">
                     <MapPin className="h-3.5 w-3.5" />
-                    {job.country}
+                    {job.location ?? job.country}
                   </span>
                 </div>
               </div>
+
+              {job.gallery && job.gallery.length > 0 && (
+                <div
+                  className="mt-3 grid gap-3"
+                  style={{ gridTemplateColumns: `repeat(${Math.min(job.gallery.length, 3)}, minmax(0, 1fr))` }}
+                >
+                  {job.gallery.slice(0, 3).map((src) => (
+                    <div
+                      key={src}
+                      className="relative h-20 overflow-hidden rounded-2xl border border-white/15 bg-slate-900 sm:h-24"
+                    >
+                      <Image
+                        src={src}
+                        alt={`${job.title}: on-site photo`}
+                        fill
+                        sizes="(max-width: 1024px) 33vw, 15vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -208,6 +231,42 @@ export default async function JobDetailPage({ params }: Props) {
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
           {/* Left Column (7 cols): Package Benefits & Candidate Requirements */}
           <div className="space-y-8 lg:col-span-7">
+            {/* Honest cost & permit notice */}
+            {job.notice && (
+              <div className="flex items-start gap-3 rounded-3xl border border-amber-300 bg-amber-50 p-5 text-sm leading-relaxed text-amber-950">
+                <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" />
+                <p>
+                  <strong className="font-bold">Read before applying: </strong>
+                  {job.notice}
+                </p>
+              </div>
+            )}
+
+            {/* Full Employment Terms Table */}
+            {job.terms && job.terms.length > 0 && (
+              <div className="overflow-hidden rounded-3xl border border-line bg-white shadow-sm">
+                <div className="border-b border-line/70 px-7 py-5 sm:px-8">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-amber-800">
+                    Employer Offer Sheet
+                  </span>
+                  <h2 className="font-display text-xl font-bold text-ink sm:text-2xl">
+                    Employment Terms &amp; Conditions
+                  </h2>
+                </div>
+                <dl className="divide-y divide-line/70">
+                  {job.terms.map((t) => (
+                    <div
+                      key={t.label}
+                      className="grid grid-cols-1 gap-1 px-7 py-3.5 text-sm sm:grid-cols-5 sm:gap-4 sm:px-8"
+                    >
+                      <dt className="font-bold text-ink sm:col-span-2">{t.label}</dt>
+                      <dd className="text-charcoal sm:col-span-3">{t.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            )}
+
             {/* Package Inclusions & Compensation Breakdown */}
             {job.benefits && job.benefits.length > 0 && (
               <div className="rounded-3xl border border-line bg-white p-7 shadow-sm sm:p-8">

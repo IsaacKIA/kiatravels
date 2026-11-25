@@ -19,9 +19,156 @@ export type Job = {
   status: JobStatus;
   featured?: boolean;
   image?: string;
+  /** Optional extra fields for richer, offer-specific detail pages */
+  location?: string;
+  openings?: number;
+  gallery?: string[];
+  terms?: { label: string; value: string }[];
+  notice?: string;
 };
 
 export const jobs: Job[] = [
+  // ─────────────────────────────────────────────────────────────────────────
+  // NEW: CZECH REPUBLIC CONSTRUCTION INTAKE (12 POSITIONS)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    slug: "czech-republic-construction-workers-prague",
+    country: "Czech Republic",
+    countryFlagEmoji: "🇨🇿",
+    title: "Construction Workers (12 Positions) — Near Prague, Czechia",
+    sector: "Construction & Trades",
+    type: "contract",
+    salary: "EUR 1,340 – EUR 1,640 / month",
+    location: "Near Prague, Czech Republic",
+    openings: 12,
+    description:
+      "12 openings for male and female construction workers on building sites near Prague. Flexible 3 to 24-month contracts with an option to extend, under Czech Labour Law.",
+    requirements: [
+      "Age 18–50 years (male or female)",
+      "Physically fit and able to perform construction work",
+      "Enough English for work-related communication",
+      "Czech language at any level is an advantage",
+      "Valid international passport",
+    ],
+    benefits: [
+      "Approx. monthly salary: EUR 1,340 – EUR 1,640",
+      "Contract options: 3, 6, 9, 12 or 24 months, with option to extend",
+      "Medical insurance and annual leave under Czech Labour Law",
+      "Accommodation available from the employer (cost deducted from salary) or arrange your own",
+      "Daily bus transport to site (commuting cost deducted from salary)",
+    ],
+    terms: [
+      { label: "Positions", value: "12 candidates" },
+      { label: "Gender", value: "Male / Female" },
+      { label: "Working time", value: "8–12 hours per day, 5–6 days per week" },
+      { label: "Night shifts", value: "As permitted under Czech Labour Law" },
+      { label: "Break time", value: "30 minutes for lunch" },
+      { label: "Contract period", value: "3, 6, 9, 12 or 24 months (extendable)" },
+      { label: "Accommodation", value: "Own, or employer-provided (deducted from salary)" },
+      { label: "Commuting", value: "By bus (deducted from salary)" },
+      { label: "Medical insurance", value: "Provided under Czech Labour Law" },
+      { label: "Annual leave", value: "Under Czech Labour Law" },
+      { label: "Work / residence permit", value: "Provided by employer for applicants already in Czechia" },
+      { label: "Visa expenses", value: "Paid by the employee" },
+      { label: "Flight tickets", value: "Paid by the employee" },
+    ],
+    notice:
+      "The employer provides the work/residence permit for applicants already in the Czech Republic. Applicants from Ghana pay their own visa and flight costs. Speak to our desk before paying anything, and we will confirm your route and full costs in writing.",
+    status: "open",
+    featured: true,
+    image: "/images/czech-construction-worker.jpg",
+    gallery: [
+      "/images/czech-construction-site-team.jpg",
+      "/images/czech-construction-supervisor.jpg",
+      "/images/czech-construction-plant.jpg",
+    ],
+  },
+  {
+    slug: "germany-heavy-truck-driver-lkw-fahrer",
+    country: "Germany",
+    countryFlagEmoji: "🇩🇪",
+    title: "Heavy Truck Drivers (LKW-Fahrer, Class C/CE) — Germany",
+    sector: "Logistics & Transport",
+    type: "full-time",
+    salary: "EUR 3,000 – EUR 3,800 / month (gross)",
+    location: "Germany (regional & long-distance routes)",
+    description:
+      "Permanent full-time jobs with German transport employers for experienced heavy truck drivers. Regional and long-distance routes, plus per diem allowances on top of salary.",
+    requirements: [
+      "Valid EU Class C or CE heavy vehicle driving licence",
+      "Valid Code 95 professional driver qualification",
+      "German language at A2–B1 level",
+      "Proven heavy truck driving experience",
+      "Able to take regional and long-distance assignments",
+      "Updated CV and driving documents",
+    ],
+    benefits: [
+      "Gross salary: EUR 3,000 – EUR 3,800 per month",
+      "Per diem allowances on top of salary",
+      "Permanent, full-time contract with a German employer",
+      "Free second visa application if the first is refused (except for medical or criminal reasons)",
+    ],
+    terms: [
+      { label: "Position", value: "Heavy Truck Driver (LKW-Fahrer)" },
+      { label: "Employment type", value: "Full-time, permanent" },
+      { label: "Routes", value: "Regional and long-distance" },
+      { label: "Salary", value: "EUR 3,000 – 3,800 gross per month + per diem" },
+      { label: "Documents to submit", value: "CV, Class C/CE licence copy, Code 95 details, proof of truck-driving experience, German certificate (if available)" },
+      { label: "Visa refusal policy", value: "First refusal: we reapply free of charge. Not covered if refused for medical or criminal reasons." },
+    ],
+    notice:
+      "This role needs an EU Class C/CE licence with Code 95 and German at A2–B1. A Ghanaian licence alone does not qualify. Talk to our desk first if you need licence conversion or German classes.",
+    status: "open",
+    featured: true,
+    image: "/images/germany-truck-driver-cab.jpg",
+    gallery: [
+      "/images/germany-truck-highway.jpg",
+      "/images/germany-truck-driver-window.jpg",
+    ],
+  },
+  {
+    slug: "portugal-housekeeper-cleaner-lisbon",
+    country: "Portugal",
+    countryFlagEmoji: "🇵🇹",
+    title: "Housekeepers & Cleaners — Lisbon, Portugal",
+    sector: "Domestic & Cleaning",
+    type: "full-time",
+    salary: "EUR 920 / month (net)",
+    location: "Lisbon, Portugal",
+    description:
+      "Full-time housekeeping and cleaning jobs in Lisbon for men and women with 1–2 years' experience. Accommodation, meals and transport are covered by the company.",
+    requirements: [
+      "Age 18–45 years (male or female)",
+      "1–2 years' experience as a housekeeper or cleaner",
+      "Basic English",
+      "Valid international passport",
+    ],
+    benefits: [
+      "Net salary: EUR 920 per month",
+      "Free accommodation, covered by the company",
+      "Free meals, covered by the company",
+      "Transport provided if needed",
+      "1-year renewable contract with a 1-year work permit",
+    ],
+    terms: [
+      { label: "Position", value: "Housekeeper / Cleaner" },
+      { label: "Location", value: "Lisbon, Portugal" },
+      { label: "Working time", value: "8 hours per day, 5 days per week" },
+      { label: "Contract", value: "1 year, renewable (1-year work permit)" },
+      { label: "Salary", value: "EUR 920 net per month" },
+      { label: "Covered by company", value: "Accommodation, meals, transport (if needed)" },
+      { label: "Visa refusal policy", value: "First refusal: we reapply free of charge. Not covered if refused for medical or criminal reasons." },
+    ],
+    notice:
+      "Applicants need 1–2 years' proven housekeeping or cleaning experience. Speak to our desk to confirm your eligibility and the full process in writing before you register.",
+    status: "open",
+    featured: true,
+    image: "/images/portugal-housekeepers-team.jpg",
+    gallery: [
+      "/images/portugal-housekeeper-bed.jpg",
+      "/images/portugal-housekeeper-towels.jpg",
+    ],
+  },
   // ─────────────────────────────────────────────────────────────────────────
   // PART 1: EUROPEAN SPECIALIZED ROLES & WORK MOBILITY
   // ─────────────────────────────────────────────────────────────────────────
