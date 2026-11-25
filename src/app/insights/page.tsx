@@ -4,6 +4,7 @@ import Image from "next/image";
 import { BookOpen, Clock, Calendar, ArrowRight, CheckCircle2, MessageCircle, ShieldCheck } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import TrackPageView from "@/components/TrackPageView";
+import InsightsExplorer from "@/components/InsightsExplorer";
 import { insightArticles } from "@/data/insights";
 import { siteConfig } from "@/data/site";
 
@@ -206,90 +207,8 @@ export default function InsightsPage() {
             </section>
           )}
 
-          {/* Grid of Other Articles */}
-          <div className="mb-16">
-            <div className="mb-8 flex items-center justify-between">
-              <div>
-                <h3 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
-                  Latest Essential Guides
-                </h3>
-                <p className="text-xs text-charcoal-soft mt-1">
-                  Practical answers to real immigration and documentation questions.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {remaining.map((article) => (
-                <article
-                  key={article.slug}
-                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                >
-                  <div>
-                    {/* Magazine Cover Photo Header */}
-                    <Link
-                      href={`/insights/${article.slug}`}
-                      className="relative block h-48 w-full overflow-hidden bg-slate-900"
-                    >
-                      <Image
-                        src={article.coverImage}
-                        alt={article.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-                      <div className="absolute inset-x-4 bottom-3 flex items-center justify-between text-xs">
-                        <span className="rounded-full bg-white/95 px-3 py-1 font-bold text-slate-900 shadow-sm backdrop-blur-sm">
-                          {article.category}
-                        </span>
-                        <span className="flex items-center gap-1 rounded-full bg-slate-950/70 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-sm">
-                          <Clock className="h-3 w-3 text-amber-400" />
-                          {article.readTime}
-                        </span>
-                      </div>
-                    </Link>
-
-                    <div className="p-6 pb-2">
-                      <h4 className="font-display text-lg font-bold leading-snug tracking-tight text-ink">
-                        <Link href={`/insights/${article.slug}`} className="transition-colors hover:text-amber-800">
-                          {article.title}
-                        </Link>
-                      </h4>
-
-                      <p className="mt-3 line-clamp-3 text-xs leading-relaxed text-charcoal-soft">
-                        {article.excerpt}
-                      </p>
-
-                      <div className="mt-4 flex flex-wrap gap-1.5">
-                        {article.tags.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-md border border-amber-200/40 bg-amber-50/60 px-2 py-0.5 text-[10px] font-medium text-amber-900"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mx-6 mb-6 mt-5 flex items-center justify-between border-t border-line/70 pt-4">
-                    <span className="text-[11px] text-slate-400">
-                      {article.publishedAt}
-                    </span>
-                    <Link
-                      href={`/insights/${article.slug}`}
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-900 hover:text-amber-700"
-                    >
-                      <span>Read Guide</span>
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
+          {/* Interactive Series Spotlight & Filterable Articles Grid */}
+          <InsightsExplorer articles={remaining} />
 
           {/* Bottom Consultation Banner */}
           <div className="rounded-3xl bg-gradient-to-r from-ink via-slate-900 to-amber-950 p-8 sm:p-12 text-center text-white shadow-2xl">
