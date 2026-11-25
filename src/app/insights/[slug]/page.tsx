@@ -109,22 +109,8 @@ export default async function InsightArticlePage({ params }: Props) {
     keywords: article.tags.join(", "),
   };
 
-  const seriesArticles = article.series
-    ? insightArticles
-        .filter((a) => a.series?.id === article.series?.id)
-        .sort((a, b) => (a.series?.part ?? 0) - (b.series?.part ?? 0))
-    : [];
-
-  const prevInSeries = article.series
-    ? seriesArticles.find((a) => a.series?.part === (article.series?.part ?? 0) - 1)
-    : undefined;
-
-  const nextInSeries = article.series
-    ? seriesArticles.find((a) => a.series?.part === (article.series?.part ?? 0) + 1)
-    : undefined;
-
   const relatedArticles = insightArticles
-    .filter((a) => a.slug !== article.slug && (!article.series || a.series?.id === article.series.id))
+    .filter((a) => a.slug !== article.slug && a.category === article.category)
     .slice(0, 2);
 
   return (
@@ -176,6 +162,30 @@ export default async function InsightArticlePage({ params }: Props) {
               </div>
             </div>
 
+            {article.gallery && article.gallery.length > 0 && (
+              <div
+                className="grid gap-3 border-b border-line/70 bg-slate-50/70 px-6 py-4 sm:px-10"
+                style={{
+                  gridTemplateColumns: `repeat(${Math.min(article.gallery.length, 3)}, minmax(0, 1fr))`,
+                }}
+              >
+                {article.gallery.map((imgSrc) => (
+                  <div
+                    key={imgSrc}
+                    className="relative h-36 overflow-hidden rounded-2xl border border-line bg-white shadow-xs sm:h-44"
+                  >
+                    <Image
+                      src={imgSrc}
+                      alt={article.title}
+                      fill
+                      sizes="(max-width: 896px) 50vw, 400px"
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div className="p-6 sm:p-10">
               <h1 className="font-display text-2xl font-bold leading-tight tracking-tight text-ink sm:text-3xl lg:text-4xl">
                 {article.title}
@@ -222,84 +232,6 @@ export default async function InsightArticlePage({ params }: Props) {
               </div>
             </div>
           </header>
-
-          {/* 12-Part Series Progress & Navigator Banner */}
-          {article.series && seriesArticles.length > 0 && (
-            <div className="mt-8 overflow-hidden rounded-3xl border border-slate-800 bg-[#0b0f17] p-6 text-white shadow-xl sm:p-8">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <div className="inline-flex items-center gap-2">
-                  <span className="rounded-full bg-amber-400 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-950">
-                    🇨🇦 Part {article.series.part} of {article.series.totalParts}
-                  </span>
-                  <span className="text-xs font-semibold text-amber-300">
-                    {article.series.phase}
-                  </span>
-                </div>
-                <span className="inline-flex items-center gap-1.5 text-xs text-slate-300">
-                  <Layers className="h-3.5 w-3.5 text-amber-400" />
-                  <span>{article.series.name}</span>
-                </span>
-              </div>
-
-              {/* Next / Previous Part Buttons */}
-              {(prevInSeries || nextInSeries) && (
-                <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                  {prevInSeries ? (
-                    <Link
-                      href={`/insights/${prevInSeries.slug}`}
-                      className="group flex flex-col justify-between rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:border-amber-400/50 hover:bg-white/10"
-                    >
-                      <span className="inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                        <ArrowLeft className="h-3.5 w-3.5 transition group-hover:-translate-x-0.5" />
-                        Previous: Part {prevInSeries.series?.part}
-                      </span>
-                      <span className="mt-1 line-clamp-1 text-xs font-bold text-white group-hover:text-amber-300">
-                        {prevInSeries.title}
-                      </span>
-                    </Link>
-                  ) : (
-                    <div />
-                  )}
-
-                  {nextInSeries && (
-                    <Link
-                      href={`/insights/${nextInSeries.slug}`}
-                      className="group flex flex-col justify-between rounded-2xl border border-amber-400/30 bg-amber-400/10 p-4 text-right transition hover:border-amber-400 hover:bg-amber-400/20"
-                    >
-                      <span className="inline-flex items-center justify-end gap-1 text-[11px] font-bold uppercase tracking-wider text-amber-300">
-                        Next: Part {nextInSeries.series?.part}
-                        <ArrowRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5" />
-                      </span>
-                      <span className="mt-1 line-clamp-1 text-xs font-bold text-white group-hover:text-amber-200">
-                        {nextInSeries.title}
-                      </span>
-                    </Link>
-                  )}
-                </div>
-              )}
-
-              {/* Compact 12-Part Pills */}
-              <div className="mt-5 flex flex-wrap gap-1.5 border-t border-white/10 pt-4">
-                {seriesArticles.map((item) => {
-                  const isCurrent = item.slug === article.slug;
-                  return (
-                    <Link
-                      key={item.slug}
-                      href={`/insights/${item.slug}`}
-                      title={item.title}
-                      className={`rounded-lg px-2.5 py-1 text-[11px] font-bold transition ${
-                        isCurrent
-                          ? "bg-amber-400 text-slate-950 shadow-sm"
-                          : "border border-white/10 bg-white/5 text-slate-300 hover:border-amber-400/40 hover:text-white"
-                      }`}
-                    >
-                      Part {item.series?.part}
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          )}
 
           {/* Key Takeaways Box */}
           <div className="mt-8 rounded-2xl border border-amber-500/20 bg-amber-50/60 p-6 sm:p-8">

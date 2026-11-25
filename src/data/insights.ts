@@ -3,6 +3,7 @@ export interface InsightArticle {
   title: string;
   excerpt: string;
   coverImage: string;
+  gallery?: string[];
   category: "Work Abroad" | "Visa Advisory" | "Study Abroad" | "Travel Advice";
   readTime: string;
   publishedAt: string;
@@ -323,7 +324,11 @@ export const insightArticles: InsightArticle[] = [
     title: "Canada is Recruiting Medical Doctors: 5 Official Pathways for Physicians to Live & Work Permanently in 2026",
     excerpt:
       "Canada faces historic doctor shortages and has unlocked 5 dedicated immigration routes for qualified international physicians. Here is the verified, time-sensitive guide to Express Entry, PNPs, Atlantic, Rural, and Francophone pilots.",
-    coverImage: "/images/work abroad (2).png",
+    coverImage: "/images/physician-portrait.jpg",
+    gallery: [
+      "/images/female-doctor-stethoscope.jpg",
+      "/images/male-medical-doctor.jpg",
+    ],
     category: "Work Abroad",
     readTime: "8 min read",
     publishedAt: "2026-04-06",
@@ -577,7 +582,7 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "canada-express-entry-category-based-selection-ghana-overview",
-    title: "Part 1: Canada Express Entry Category-Based Selection Explained for Ghanaians (Official IRCC Breakdown)",
+    title: "Canada Express Entry Category-Based Selection Explained for Ghanaians (Official IRCC Breakdown)",
     excerpt:
       "A clear, factual breakdown of Canada's targeted Express Entry categories — which categories you can qualify for directly from Ghana, which require Canadian work experience, and how the 12-month experience rule works.",
     coverImage: "/images/Airport view.png",
@@ -647,7 +652,7 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "canada-fsw-67-points-eligibility-grid-ghana-guide",
-    title: "Part 2: The First Gate — How to Pass Canada's 67-Point Federal Skilled Worker (FSW) Grid from Ghana",
+    title: "How to Pass Canada's 67-Point Federal Skilled Worker (FSW) Eligibility Grid from Ghana",
     excerpt:
       "Before IRCC can invite you in any category draw, you must score at least 67 out of 100 points on the Federal Skilled Worker eligibility grid. Here is the exact official scoring breakdown for Ghanaians.",
     coverImage: "/images/Study Abroad (2).png",
@@ -715,7 +720,7 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "canada-education-category-draws-teachers-ghana-guide",
-    title: "Part 3: Canada's Education Category Draw — How Ghanaian Teachers & Early Childhood Educators Qualify",
+    title: "Canada's Education Category Draw: How Ghanaian Teachers & Early Childhood Educators Qualify",
     excerpt:
       "IRCC added Education Occupations as a priority Express Entry category. Here are the 5 official NOC codes for teachers, kindergarten educators, special needs instructors, and teaching assistants in Ghana.",
     coverImage: "/images/Group study.png",
@@ -782,10 +787,14 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "canada-healthcare-social-services-category-nurses-pharmacists-ghana",
-    title: "Part 4: Canada Healthcare & Social Services Draws — Complete NOC Guide for Ghanaian Nurses, Lab Techs & Pharmacists",
+    title: "Canada Healthcare & Social Services Draws: Complete NOC Guide for Ghanaian Nurses, Lab Techs & Pharmacists",
     excerpt:
       "Healthcare and Social Services is one of Canada's largest Express Entry categories with over 30 eligible NOC codes. See how Ghanaian nurses, midwives, lab scientists, pharmacists, and social workers qualify.",
-    coverImage: "/images/Study Abroad.png",
+    coverImage: "/images/doctor-healthcare-clinic.jpg",
+    gallery: [
+      "/images/female-doctor-stethoscope.jpg",
+      "/images/physician-portrait.jpg",
+    ],
     category: "Work Abroad",
     readTime: "7 min read",
     publishedAt: "2026-04-08",
@@ -852,7 +861,7 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "canada-stem-category-draws-engineers-it-cybersecurity-ghana",
-    title: "Part 7: Canada STEM Category Draws — Eligible NOCs for Ghanaian Engineers, Software Developers & Data Specialists",
+    title: "Canada STEM Category Draws: Eligible NOCs for Ghanaian Engineers, Software Developers & Data Specialists",
     excerpt:
       "How Ghanaian civil, electrical, and mechanical engineers, software developers, cybersecurity analysts, and data scientists qualify under IRCC's Science, Technology, Engineering and Math (STEM) category.",
     coverImage: "/images/engineer.png",
@@ -920,10 +929,10 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "canada-french-language-proficiency-express-entry-shortcut-ghana",
-    title: "Part 8: The French-Language Express Entry Shortcut (NCLC 7+) — Record-Low CRS Cutoffs for Bilingual Ghanaians",
+    title: "The French-Language Express Entry Shortcut (NCLC 7+): Lower CRS Cutoffs for Bilingual Ghanaians",
     excerpt:
       "French-Language Proficiency is Canada's #1 priority Express Entry category outside Quebec, consistently offering the lowest CRS score cutoffs (often 380–440). Here is how bilingual Ghanaians can qualify via TEF or TCF Canada.",
-    coverImage: "/images/University Campus.png",
+    coverImage: "/images/Study Abroad.png",
     category: "Work Abroad",
     readTime: "6 min read",
     publishedAt: "2026-04-08",
@@ -985,10 +994,10 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "canada-transport-occupations-category-drivers-aviation-ghana",
-    title: "Part 9: Canada Transport Category Draws — Truck Drivers, Aircraft Technicians & Marine Officers",
+    title: "Canada Transport Category Draws: Commercial Truck Drivers, Aircraft Technicians & Marine Officers",
     excerpt:
       "Understanding IRCC's Transport Occupations category for commercial truck drivers, aviation mechanics, pilots, and marine transport officers — plus the critical FSW vs. provincial licensing reality for Ghanaians.",
-    coverImage: "/images/VEAVY TRUCK DRIVER (3).png",
+    coverImage: "/images/germany-truck-driver-cab.jpg",
     category: "Work Abroad",
     readTime: "6 min read",
     publishedAt: "2026-04-08",
@@ -1050,7 +1059,7 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "ghana-educational-credential-assessment-eca-wes-icas-mcc-pebc-guide",
-    title: "Part 10: Step-by-Step ECA Guide — Verifying Your Ghanaian Degree, HND, Teacher or Medical Diploma for Canada",
+    title: "Step-by-Step ECA Guide: Verifying Your Ghanaian Degree, HND, Teacher or Medical Diploma for Canada",
     excerpt:
       "You cannot enter the Express Entry pool using a Ghanaian degree or diploma without an official Educational Credential Assessment (ECA). Here is how to verify KNUST, UG, UCC, UEW, GIMPA, and CTVET/NABPTEX transcripts via WES, ICAS, MCC, or PEBC.",
     coverImage: "/images/University.png",
@@ -1121,7 +1130,7 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "ircc-employer-reference-letter-noc-duties-ghana-guide",
-    title: "Part 11: Avoiding the #1 Refusal Trap — How to Write an IRCC-Compliant Employer Reference Letter in Ghana",
+    title: "How to Write an IRCC-Compliant Employer Reference Letter in Ghana (Matching Your 5-Digit NOC Code)",
     excerpt:
       "A standard Ghanaian 'To Whom It May Concern' confirmation letter will get your Canada PR application refused. Learn the exact 7 data points IRCC officers check against your 5-digit NOC code.",
     coverImage: "/images/work abroad (3).png",
@@ -1195,10 +1204,10 @@ export const insightArticles: InsightArticle[] = [
   },
   {
     slug: "canada-express-entry-proof-of-funds-police-cid-biometrics-ghana",
-    title: "Part 12: Settlement Proof of Funds, Ghana Police CID Clearance, Medicals & Official IRCC Fees (Final Checklist)",
+    title: "Canada Express Entry Settlement Funds, Ghana Police CID Clearance, Medicals & Official IRCC Fees",
     excerpt:
       "You received your Invitation to Apply (ITA) — now you have 60 days to submit a flawless PR file. Here are the official IRCC settlement fund figures, Gift Deed rules, Accra CID Police Certificate steps, and statutory government fees.",
-    coverImage: "/images/visa.png",
+    coverImage: "/images/flight boarding.png",
     category: "Visa Advisory",
     readTime: "7 min read",
     publishedAt: "2026-04-08",
