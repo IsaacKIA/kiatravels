@@ -241,8 +241,16 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Anti-Fraud & Browser Security Verification Strip */}
+        <div className="mt-12 rounded-2xl border border-emerald-500/20 bg-emerald-950/20 px-5 py-4 text-xs text-slate-300">
+          <p className="leading-relaxed">
+            <strong className="font-bold text-emerald-400">Official Security &amp; Anti-Fraud Notice: </strong>
+            This website (<span className="font-mono text-white">travels.kiastartupconsult.com</span>) is protected by HTTPS/TLS encryption and never requests bank passwords, mobile money PINs, or credit card numbers online. Official KIA-Start Up Consult correspondence occurs strictly through <span className="font-semibold text-white">{siteConfig.phoneLocal}</span>, <span className="font-semibold text-white">{siteConfig.phoneIntl}</span>, and <span className="font-semibold text-white">{siteConfig.email}</span>.
+          </p>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="mt-14 border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div className="mt-6 border-t border-slate-800/80 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <p className="text-[11px] text-slate-500">
             &copy; {new Date().getFullYear()} KIA-Start Up Consult. All rights reserved. Registered
             in Ghana.

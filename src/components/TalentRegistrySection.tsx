@@ -51,6 +51,7 @@ export default function TalentRegistrySection() {
   const [qualification, setQualification] = useState(qualificationTiers[1]);
   const [passportStatus, setPassportStatus] = useState(passportStatuses[0]);
   const [corridor, setCorridor] = useState(targetCorridors[0]);
+  const [website, setWebsite] = useState(""); // honeypot
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [referenceId, setReferenceId] = useState<string | null>(null);
   const [waLink, setWaLink] = useState<string | null>(null);
@@ -58,6 +59,7 @@ export default function TalentRegistrySection() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (website) return; // honeypot tripped
     if (!fullName.trim() || !whatsapp.trim()) {
       setError("Please enter your full name and WhatsApp phone number.");
       return;
@@ -84,6 +86,7 @@ export default function TalentRegistrySection() {
           whatsapp,
           service: "talent-registry",
           details,
+          website,
         }),
       });
       const data = (await res.json()) as { ok?: boolean; referenceId?: string };
@@ -205,7 +208,18 @@ export default function TalentRegistrySection() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                <form onSubmit={handleSubmit} noValidate className="relative space-y-4">
+                  <div className="absolute -left-[9999px]" aria-hidden="true">
+                    <label htmlFor="reg-website">Leave this field empty</label>
+                    <input
+                      type="text"
+                      id="reg-website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                    />
+                  </div>
                   <div className="flex items-center justify-between border-b border-line pb-3">
                     <h3 className="font-display text-xl font-bold text-ink">
                       Candidate Trade &amp; Skill Registration

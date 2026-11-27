@@ -141,6 +141,12 @@ const jsonLd = {
         "@type": "AdministrativeArea",
         name: "Ghana",
       },
+      sameAs: [
+        "https://www.instagram.com/kia_startup_consult/",
+        "https://www.facebook.com/kiastartup",
+        "https://www.linkedin.com/company/kia-start-up-consult",
+        "https://www.tiktok.com/@kia_startup_consult",
+      ],
     },
     {
       "@type": "WebSite",
